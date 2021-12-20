@@ -1,10 +1,70 @@
 .container {
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  transform: translate(-50%);
   border: 6px solid black;
-  border-radius: 50px;
+  border-radius: 10px;
   margin: auto;
   margin-top: 75px;
   background: #fff;
   height: 70vh;
   width: 50vw;
   min-width: 300px;
+  overflow: scroll;
+  box-shadow: 12px 12px 24px rgba(18, 29, 28, 0.64);
+}
+
+.gem {
+  min-height: 40px;
+  font-size: 40px;
+  color: #4fd1c5;
+  background: #fff;
+  border: 3px solid #4fd1c5;
+  border-radius: 100%;
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 15px;
+}
+
+.gem:hover,
+.gem:focus {
+  color: #000;
+  transform: translateY(-6px);
+  border: 6px solid #00ffcb;
+  box-shadow: 0 0 60px rgba(0, 255, 203, 0.64);
+}
+
+.gem:hover::before,
+.gem:focus::before {
+  opacity: 1;
+}
+
+.cancel {
+  min-height: 30px;
+  font-size: 12px;
+  color: #ff0000;
+  background: #fff;
+  border: 3px solid #ff0000;
+  border-radius: 100%;
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 15px;
+}
+
+.cancel:hover,
+.cancel:focus {
+  color: #000;
+  transform: translateY(-6px);
+  border: 6px solid #f55a5a;
+  box-shadow: 0 0 60px rgba(240, 88, 88, 0.64);
+}
+
+.cancel:hover::before,
+.cancel:focus::before {
+  opacity: 1;
 }
