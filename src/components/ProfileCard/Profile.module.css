@@ -14,7 +14,3 @@
   overflow: scroll;
   box-shadow: 12px 12px 24px rgba(18, 29, 28, 0.64);
 }
-
-.container::-webkit-scrollbar {
-  display: none;
-}

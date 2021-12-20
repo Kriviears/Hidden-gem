@@ -6,18 +6,25 @@ import MapGL, {
   GeolocateControl,
   NavigationControl,
 } from "react-map-gl";
+import useModal from "../hooks/useModals";
 import Geocoder from "react-map-gl-geocoder";
 import Nav from "./Nav/Nav";
 import GemForm from "./GemForm/GemForm";
 import GemInfo from "./GemInfo/GemInfo";
+import Profile from "./ProfileCard/Profile";
+import Filter from "./FilterCard/Filter";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const Map = () => {
+  const { displayGemForm, displayGems, displayProfile, displayFilter } =
+    useModal();
+
   const [selected, setSelected] = useState(null);
   const [userPos, setUserPos] = useState([]);
   const [distFilter, setDistFilter] = useState(Infinity);
   const [data, setData] = useState([]);
+  const [showGems, setShowGems] = useState(false);
 
   useEffect(() => {
     function getPos(pos) {
@@ -77,7 +84,8 @@ const Map = () => {
     height: "100vh",
     latitude: userPos[0],
     longitude: userPos[1],
-    zoom: 15,
+    pitch: 60,
+    zoom: 17,
   });
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -91,6 +99,8 @@ const Map = () => {
 
       return handleViewportChange({
         ...newViewport,
+        zoom: 17,
+        pitch: 60,
         ...geocoderDefaultOverrides,
       });
     },
@@ -132,11 +142,10 @@ const Map = () => {
       },
     ]);
     setViewport({
-      width: "100vw",
-      height: "100vh",
+      ...viewport,
+      zoom: 17,
       latitude: userPos[0],
       longitude: userPos[1],
-      zoom: 15,
       transitionDuration: 1000,
     });
   }
@@ -152,111 +161,112 @@ const Map = () => {
   };
 
   return (
-    <MapGL
-      ref={mapRef}
-      {...viewport}
-      onViewportChange={handleViewportChange}
-      mapboxApiAccessToken={MAPBOX_TOKEN}
-      mapStyle="mapbox://styles/eruity/ckx571w430ll315mmqlgxoi0m"
-    >
-      <Geocoder
-        mapRef={mapRef}
-        onViewportChange={handleGeocoderViewportChange}
+    <>
+      <MapGL
+        ref={mapRef}
+        {...viewport}
+        onViewportChange={handleViewportChange}
         mapboxApiAccessToken={MAPBOX_TOKEN}
-        position="top-left"
-      />
-      <NavigationControl style={navControlStyle} />
-      <GeolocateControl
-        style={geolocateControlStyle}
-        positionOptions={{ enableHighAccuracy: true }}
-        trackUserLocation={true}
-        showAccuracyCircle={false}
-        auto
-      />
-      {data
-        .filter((el) => calcDist(el.lat, el.lng) < distFilter)
-        .map((el) => {
-          return (
-            <Marker
-              key={el.lat}
-              latitude={el.lat}
-              longitude={el.lng}
-              offsetLeft={-10}
-              offsetTop={-10}
-            >
-              {el.category === "food" ? (
-                <i
-                  style={{ color: "red" }}
-                  class="far fa-gem"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSelected(el);
-                    setViewport({
-                      width: "100vw",
-                      height: "100vh",
-                      latitude: el.lat,
-                      longitude: el.lng,
-                      zoom: 15,
-                      transitionDuration: 1000,
-                    });
-                  }}
-                ></i>
-              ) : el.category === "education" ? (
-                <i
-                  style={{ color: "blue" }}
-                  class="far fa-gem"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSelected(el);
-                    setViewport({
-                      width: "100vw",
-                      height: "100vh",
-                      latitude: el.lat,
-                      longitude: el.lng,
-                      zoom: 15,
-                      transitionDuration: 1000,
-                    });
-                  }}
-                ></i>
-              ) : (
-                <i
-                  class="far fa-gem"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSelected(el);
-                    setViewport({
-                      width: "100vw",
-                      height: "100vh",
-                      latitude: el.lat,
-                      longitude: el.lng,
-                      zoom: 15,
-                      transitionDuration: 1000,
-                    });
-                    console.log(selected);
-                  }}
-                ></i>
-              )}
-            </Marker>
-          );
-        })}
+        mapStyle="mapbox://styles/eruity/ckx571w430ll315mmqlgxoi0m"
+      >
+        <Geocoder
+          mapRef={mapRef}
+          onViewportChange={handleGeocoderViewportChange}
+          mapboxApiAccessToken={MAPBOX_TOKEN}
+          position="top-left"
+        />
+        <NavigationControl style={navControlStyle} />
+        <GeolocateControl
+          style={geolocateControlStyle}
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+          showAccuracyCircle={false}
+          auto
+        />
+        {data
+          .filter((el) => calcDist(el.lat, el.lng) < distFilter)
+          .map((el) => {
+            return (
+              <Marker
+                key={el.lat}
+                latitude={el.lat}
+                longitude={el.lng}
+                offsetLeft={-10}
+                offsetTop={-10}
+              >
+                {el.category === "food" ? (
+                  <i
+                    style={{ color: "red" }}
+                    class="far fa-gem"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelected(el);
+                      setViewport({
+                        ...viewport,
+                        zoom: 17,
+                        latitude: el.lat,
+                        longitude: el.lng,
+                        transitionDuration: 1000,
+                      });
+                    }}
+                  ></i>
+                ) : el.category === "education" ? (
+                  <i
+                    style={{ color: "blue" }}
+                    class="far fa-gem"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelected(el);
+                      setViewport({
+                        ...viewport,
+                        zoom: 17,
+                        latitude: el.lat,
+                        longitude: el.lng,
+                        transitionDuration: 1000,
+                      });
+                    }}
+                  ></i>
+                ) : (
+                  <i
+                    class="far fa-gem"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelected(el);
+                      setViewport({
+                        ...viewport,
+                        zoom: 17,
+                        latitude: el.lat,
+                        longitude: el.lng,
+                        transitionDuration: 1000,
+                      });
+                      console.log(selected);
+                    }}
+                  ></i>
+                )}
+              </Marker>
+            );
+          })}
 
-      {selected ? (
-        <Popup
-          latitude={selected.lat}
-          longitude={selected.lng}
-          offsetTop={-10}
-          onClose={() => setSelected(null)}
-        >
-          <h3>{selected.name}</h3>
-          <h6>
-            {calcDist(selected.lat, selected.lng).toFixed(2)} miles from you
-          </h6>
-        </Popup>
-      ) : null}
-      {/* <GemInfo data={data} /> */}
-      {/* <GemForm /> */}
-      <Nav event={dropGem} />
-    </MapGL>
+        {selected ? (
+          <Popup
+            latitude={selected.lat}
+            longitude={selected.lng}
+            offsetTop={-10}
+            onClose={() => setSelected(null)}
+          >
+            <h3>{selected.name}</h3>
+            <h6>
+              {calcDist(selected.lat, selected.lng).toFixed(2)} miles from you
+            </h6>
+          </Popup>
+        ) : null}
+        <Nav event={dropGem} openGem={() => setShowGems(!showGems)} />
+      </MapGL>
+      {displayProfile && <Profile />}
+      {displayGemForm && <GemForm />}
+      {displayGems && <GemInfo data={data} />}
+      {displayFilter && <Filter />}
+    </>
   );
 };
 

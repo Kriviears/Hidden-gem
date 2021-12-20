@@ -2,11 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { ManagedModalContext } from "./hooks/useModals";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ManagedModalContext>
+      <App />
+    </ManagedModalContext>
   </React.StrictMode>,
   document.getElementById("root")
 );
