@@ -264,7 +264,7 @@ const Map = () => {
                 {calcDist(el.lat, el.lng) < 0.11 ? (
                   <i
                     style={{ color: "#00ffcb", transform: "scale(1.3)" }}
-                    class="far fa-gem"
+                    class="fas fa-gem"
                     onClick={(e) => {
                       e.preventDefault();
                       setSelected(el);
