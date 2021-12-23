@@ -7,7 +7,7 @@ import SearchForm from './components/SearchForm/SearchForm';
 import "./App.css";
 import Map from "./components/Map";
 import './App.css';
-import SearchForm from './components/SearchForm/SearchForm';
+
 
 
 

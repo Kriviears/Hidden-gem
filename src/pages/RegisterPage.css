@@ -1,0 +1,48 @@
+.reg_form {
+    background-color: lightblue;
+    display: flex;
+    flex: 50%;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+
+.reg_label{
+  display: block;
+  font-size: small;
+  color: white;
+  padding: 5px;
+  flex: 50%;
+}
+  
+.input{
+  font-size: small;
+  padding: 5px;
+  margin: 2px;
+   
+}
+  
+.messages{
+  display: flex;
+  justify-content: center;
+}
+  
+.error{
+  display: block;
+  background-color: red;
+  color: white;
+  width: fit-content;
+  height: 50px;
+  padding: 5px;
+  margin: auto;
+}
+  
+.success{
+  display: block;
+  color: black;
+  width: fit-content;
+  height: 40px;
+  padding: 5px;
+}
