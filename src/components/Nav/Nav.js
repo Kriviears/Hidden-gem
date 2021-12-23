@@ -11,7 +11,11 @@ function Nav(props) {
           Profile
         </button>
         <button className={classes.btn}>Button</button>
-        <button onClick={toggleForm} className={classes.gem}>
+        <button
+          onClick={toggleForm}
+          // onClick={props.event}
+          className={classes.gem}
+        >
           <i class="far fa-gem"></i>
         </button>
         <button className={classes.btn} onClick={toggleGems}>
