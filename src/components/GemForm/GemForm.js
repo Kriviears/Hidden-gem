@@ -3,6 +3,7 @@ import ReactTooltip from "react-tooltip";
 import classes from "./GemForm.module.css";
 import "./radio.css";
 import useModal from "../../hooks/useModals";
+import ReviewCard from "../ReviewCard/ReviewCard";
 
 function GemForm(props) {
   const { closeForm } = useModal();
@@ -198,6 +199,7 @@ function GemForm(props) {
           </button>
         </div>
       </form>
+      {/* <ReviewCard /> */}
     </div>
   );
 }
