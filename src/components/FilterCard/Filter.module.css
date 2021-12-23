@@ -14,3 +14,57 @@
   overflow: scroll;
   box-shadow: 12px 12px 24px rgba(18, 29, 28, 0.64);
 }
+<<<<<<< HEAD
+=======
+
+/*  FIXME: The below code will cover the check boxes.
+.search{
+  margin-top: 50px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Nunito", sans-serif;
+  padding: 0;
+  justify-content: flex-end;
+  bottom: 0px;
+}
+
+.search_form{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  font-size: large;
+  background-color: lightskyblue;
+}   
+
+
+.search-card-body {
+background-color: lightskyblue;
+text-align: center;
+
+}
+
+
+
+
+.search-btn {
+  border: none;
+  color: white; 
+  padding: 12px 16px; 
+  font-size: 10px; 
+  cursor: pointer; 
+}
+
+
+.search-btn:hover {
+  background-color: RoyalBlue;
+}
+
+.card-footer{
+  background-color: lightskyblue;
+} */
+>>>>>>> f4616155ffc5949b5bb674c37e7d3934ada96da5
