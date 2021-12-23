@@ -15,14 +15,22 @@
 
 }
 
+<<<<<<< HEAD
 .search-card-body {
+=======
+.search_card_body {
+>>>>>>> 56d8fc8 (Added changes merged)
   background-color: lightskyblue;
   text-align: center;
   
 }
 
 
+<<<<<<< HEAD
 .search-form{
+=======
+.search_form{
+>>>>>>> 56d8fc8 (Added changes merged)
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -33,7 +41,11 @@
 }   
 
 
+<<<<<<< HEAD
 .search-btn {
+=======
+.search_btn {
+>>>>>>> 56d8fc8 (Added changes merged)
     border: none;
     color: white; 
     padding: 12px 16px; 
@@ -42,10 +54,18 @@
   }
   
   /* Darker background on mouse-over */
+<<<<<<< HEAD
   .search-btn:hover {
     background-color: RoyalBlue;
   }
 
   .card-footer{
+=======
+  .search_btn:hover {
+    background-color: RoyalBlue;
+  }
+
+  .card_footer{
+>>>>>>> 56d8fc8 (Added changes merged)
     background-color: lightskyblue;
   }

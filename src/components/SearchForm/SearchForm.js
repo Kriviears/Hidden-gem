@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
+<<<<<<< HEAD
 import { Card } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 
@@ -125,4 +126,20 @@ const SearchForm = () => {
   );
 };
 
+=======
+
+
+ const SearchForm = ()  => {
+  return (
+    <div>
+
+
+    </div>
+    
+  );
+
+ }
+
+  
+>>>>>>> 56d8fc8 (Added changes merged)
 export default SearchForm;
