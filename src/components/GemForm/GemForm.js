@@ -1,9 +1,7 @@
 import React, { useState, useRef } from "react";
 import ReactTooltip from "react-tooltip";
 import classes from "./GemForm.module.css";
-import "./radio.css";
 import useModal from "../../hooks/useModals";
-import ReviewCard from "../ReviewCard/ReviewCard";
 
 function GemForm(props) {
   const { closeForm } = useModal();
@@ -47,6 +45,7 @@ function GemForm(props) {
         <div className={classes.radio_container}>
           <label className={classes.radio} data-tip data-for="foodTip">
             <input
+              className={classes.icon}
               type="radio"
               for="Food"
               name="category"
@@ -62,6 +61,7 @@ function GemForm(props) {
           </ReactTooltip>
           <label className={classes.radio} data-tip data-for="educationTip">
             <input
+              className={classes.icon}
               type="radio"
               name="category"
               for="Education"
@@ -77,6 +77,7 @@ function GemForm(props) {
           </ReactTooltip>
           <label className={classes.radio} data-tip data-for="lateTip">
             <input
+              className={classes.icon}
               type="radio"
               name="category"
               for="Late Night"
@@ -92,6 +93,7 @@ function GemForm(props) {
           </ReactTooltip>
           <label className={classes.radio} data-tip data-for="outdoorsTip">
             <input
+              className={classes.icon}
               type="radio"
               name="category"
               for="Outdoors"
@@ -107,6 +109,7 @@ function GemForm(props) {
           </ReactTooltip>
           <label className={classes.radio} data-tip data-for="dateTip">
             <input
+              className={classes.icon}
               type="radio"
               name="category"
               for="Date Night"
@@ -122,6 +125,7 @@ function GemForm(props) {
           </ReactTooltip>
           <label className={classes.radio} data-tip data-for="entertainmentTip">
             <input
+              className={classes.icon}
               type="radio"
               name="category"
               for="Entertainment"
@@ -137,6 +141,7 @@ function GemForm(props) {
           </ReactTooltip>
           <label className={classes.radio} data-tip data-for="sportingTip">
             <input
+              className={classes.icon}
               type="radio"
               name="category"
               for="Sporting"
@@ -153,6 +158,7 @@ function GemForm(props) {
           </ReactTooltip>
           <label className={classes.radio} data-tip data-for="sightTip">
             <input
+              className={classes.icon}
               type="radio"
               name="category"
               for="Sight Seeing"
@@ -168,6 +174,7 @@ function GemForm(props) {
           </ReactTooltip>
           <label className={classes.radio} data-tip data-for="otherTip">
             <input
+              className={classes.icon}
               type="radio"
               name="category"
               for="Other"
@@ -199,7 +206,6 @@ function GemForm(props) {
           </button>
         </div>
       </form>
-      {/* <ReviewCard /> */}
     </div>
   );
 }

@@ -2,9 +2,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0;
   padding-left: 2rem;
   padding-right: 2rem;
   border-bottom: 1px solid black;
+}
+
+.info {
+  text-align: left;
+}
+
+.info h4,
+.info p {
+  margin-bottom: 0;
 }
 
 .rating {

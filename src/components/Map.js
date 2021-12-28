@@ -15,6 +15,7 @@ import GemForm from "./GemForm/GemForm";
 import GemInfo from "./GemInfo/GemInfo";
 import Profile from "./ProfileCard/Profile";
 import Filter from "./FilterCard/Filter";
+import ReviewCard from "./ReviewCard/ReviewCard";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -385,6 +386,7 @@ const Map = () => {
                 />
               </div>
             </div>
+            <ReviewCard gem={selected} />
           </Popup>
         ) : null}
         <Nav event={dropGem} openGem={() => setShowGems(!showGems)} />

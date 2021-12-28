@@ -9,7 +9,7 @@ function GemCard({ data }) {
 
   return (
     <div className={classes.card}>
-      <div>
+      <div className={classes.info}>
         <h4>{data.name}</h4>
         <p>{data.category}</p>
       </div>

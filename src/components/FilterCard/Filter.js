@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import classes from "./Filter.module.css";
-
-function Filter() {
-  return <div className={classes.container}></div>;
-=======
 import React, { useState } from "react";
 import classes from "./Filter.module.css";
 import { Card } from "react-bootstrap";
@@ -63,7 +56,7 @@ function Filter() {
                     onClick={(e) => buttonClickHandler(e, "value")}
                     id="btn-check"
                   />
-                   OUTDOORS 
+                  OUTDOORS
                 </label>
 
                 <label className="btn-btn-primary">
@@ -74,7 +67,7 @@ function Filter() {
                     onClick={(e) => buttonClickHandler(e, "value")}
                     id="btn-check"
                   />
-                   DATE NIGHT 
+                  DATE NIGHT
                 </label>
 
                 <label className="btn-btn-primary">
@@ -85,7 +78,7 @@ function Filter() {
                     onClick={(e) => buttonClickHandler(e, "value")}
                     id="btn-check"
                   />
-                   FOOD 
+                  FOOD
                 </label>
 
                 <label className="btn-btn-primary">
@@ -96,7 +89,7 @@ function Filter() {
                     onClick={(e) => buttonClickHandler(e, "value")}
                     id="btn-check"
                   />
-                   SIGHT SEEING 
+                  SIGHT SEEING
                 </label>
               </Card.Text>
 
@@ -108,7 +101,7 @@ function Filter() {
                   onClick={(e) => buttonClickHandler(e, "value")}
                   id="btn-check"
                 />
-                 EDUCATION 
+                EDUCATION
               </label>
 
               <label className="btn-btn-primary">
@@ -119,7 +112,7 @@ function Filter() {
                   onClick={(e) => buttonClickHandler(e, "value")}
                   id="btn-check"
                 />
-                 LATE NIGHT 
+                LATE NIGHT
               </label>
 
               <label className="btn-btn-primary">
@@ -130,7 +123,7 @@ function Filter() {
                   onClick={(e) => buttonClickHandler(e, "value")}
                   id="btn-check"
                 />
-                 OTHER 
+                OTHER
               </label>
             </Card.Body>
             <Card.Footer className="card-footer">
@@ -143,7 +136,6 @@ function Filter() {
       </div>
     </div>
   );
->>>>>>> f4616155ffc5949b5bb674c37e7d3934ada96da5
 }
 
 export default Filter;
