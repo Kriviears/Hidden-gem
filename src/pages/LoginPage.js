@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Dropdown, Button } from "react-bootstrap";
+import { Form, Col, Button, NavLink } from "react-bootstrap";
 
 import "./LoginPage.css";
 
 const LoginPage = () => {
   // States for individual registration
-
-  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +13,9 @@ const LoginPage = () => {
   const [error, setError] = useState(false);
 
   //Start handling functions:
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -29,7 +30,7 @@ const LoginPage = () => {
   // FUNCTION Handling the submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    if ( email === "" || password === "") {
+    if (email === "" || password === "") {
       setError(true);
     } else {
       setSubmitted(true);
@@ -38,7 +39,7 @@ const LoginPage = () => {
 
     let dataObject = {
       email: email,
-      password: password
+      password: password,
     };
     console.log(dataObject);
   };
@@ -52,7 +53,7 @@ const LoginPage = () => {
           display: submitted ? "" : "none",
         }}
       >
-        <h1> You're logged In!</h1>
+        <h2> You're logged in</h2>
       </div>
     );
   };
@@ -66,7 +67,7 @@ const LoginPage = () => {
           display: error ? "" : "none",
         }}
       >
-        <h1>Darn! Something went wrong!</h1>
+        <h2>Darn! Something went wrong!</h2>
       </div>
     );
   };
@@ -75,7 +76,7 @@ const LoginPage = () => {
   return (
     <div className="login_form">
       <div>
-        <h2>Login</h2>
+        <h2>Sign In</h2>
       </div>
 
       {/* Calling to the methods */}
@@ -86,29 +87,45 @@ const LoginPage = () => {
 
       <form>
         {/* Labels and inputs for form data */}
+        <Form.Group as={Col}>
+          <Form.Label className="reg_label">Email</Form.Label>
+          <Form.Control
+            onChange={handleEmail}
+            className="input"
+            value={email}
+            type="email"
+            required
+          />
+        </Form.Group>
 
-        <label id="top_login" className="login_label">Email</label>
-        <input
-          onChange={handleEmail}
-          className="input"
-          value={email}
-          type="email"
-          required
-        />
+        <Form.Group as={Col}>
+          <Form.Label className="reg_label">Password</Form.Label>
+          <Form.Control
+            onChange={handlePassword}
+            placeholder="At least 8 characters "
+            className="input"
+            value={password}
+            type="password"
+            required
+          />
+        </Form.Group>
 
-        <label className="login_label">Password</label>
-        <input
-          onChange={handlePassword}
-          className="input"
-          value={password}
-          type="password"
-          required
-        />
-
-        <Button onClick={handleSubmit} bg="secondary" type="submit">
-          Login
+        <Button
+          onClick={handleSubmit}
+          bg="secondary"
+          type="submit"
+          disabled={!validateForm()}
+        >
+          Sign In
         </Button>
       </form>
+
+      <NavLink
+        style={{ cursor: "pointer" }}
+        onClick={() => console.log("Link to register")}
+      >
+        No account? Sign Up!
+      </NavLink>
     </div>
   );
 };

@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import classes from "./Filter.module.css";
-
-function Filter() {
-  return <div className={classes.container}></div>;
-=======
 import React, { useState } from "react";
 import classes from "./Filter.module.css";
 import { Card } from "react-bootstrap";
@@ -143,7 +136,6 @@ function Filter() {
       </div>
     </div>
   );
->>>>>>> f4616155ffc5949b5bb674c37e7d3934ada96da5
 }
 
 export default Filter;
