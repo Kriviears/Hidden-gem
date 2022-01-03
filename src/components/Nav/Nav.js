@@ -5,7 +5,7 @@ import classes from "./Nav.module.css";
 function Nav(props) {
   const { toggleForm, toggleGems, toggleProfile, toggleFilter } = useModal();
   return (
-    <div className={classes.nav_container}>
+    <div className={classes.container}>
       <nav className={classes.nav}>
         <button className={classes.btn} onClick={toggleProfile}>
           Profile

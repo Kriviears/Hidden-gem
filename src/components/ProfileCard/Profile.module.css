@@ -40,3 +40,43 @@
 .dropdown h5 {
   margin-bottom: 0;
 }
+
+.close {
+  position: absolute;
+  left: 0;
+  font-size: 30px;
+  color: #747474;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: all 1s;
+}
+
+.close:hover {
+  transform: rotate(180deg);
+  color: #000;
+}
+
+.close:focus {
+  outline: none;
+}
+
+.settings {
+  position: absolute;
+  right: 0;
+  font-size: 30px;
+  color: #747474;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: all 1s;
+}
+
+.settings:hover {
+  transform: rotate(180deg);
+  color: #000;
+}
+
+.settings:focus {
+  outline: none;
+}

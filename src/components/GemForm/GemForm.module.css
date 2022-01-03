@@ -17,9 +17,10 @@
 }
 
 .title {
-  margin-top: 50px;
+  margin-top: 40px;
+  margin-bottom: 20px;
   font-size: 1.5rem;
-  color: #8ab1f5;
+  color: #4285f4;
 }
 
 .title i {
@@ -64,6 +65,29 @@
 .radio input {
   opacity: 0;
   position: absolute;
+}
+
+.icon {
+  opacity: 0;
+  position: absolute;
+}
+
+.icon + span {
+  font-size: 25px;
+  color: #8ab1f5;
+  border-radius: 50%;
+  padding: 12px;
+  transition: all 0.4s;
+  margin-top: 5px;
+}
+
+.icon:checked + span {
+  color: #d9e7fd;
+  background-color: #4285f4;
+}
+
+.icon:focus + span {
+  color: #fff;
 }
 
 .textarea {
@@ -146,41 +170,22 @@
   opacity: 1;
 }
 
-.icon {
-  opacity: 0;
+.close {
   position: absolute;
-}
-
-.icon + span {
-  font-size: 25px;
-  color: #8ab1f5;
-  border-radius: 50%;
-  padding: 12px;
-  transition: all 0.4s;
-  margin-top: 5px;
-}
-
-.icon:checked + span {
-  color: #d9e7fd;
-  background-color: #4285f4;
-}
-
-.icon:focus + span {
-  color: #fff;
-}
-
-.icon:hover::before {
-  content: attr(for);
-  text-transform: capitalize;
-  font-size: 11px;
-  position: absolute;
-  top: 170%;
   left: 0;
-  right: 0;
-  opacity: 0.75;
-  background-color: #323232;
-  color: #fff;
-  padding: 4px;
-  border-radius: 3px;
-  display: block;
+  font-size: 30px;
+  color: #747474;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: all 1s;
+}
+
+.close:hover {
+  transform: rotate(180deg);
+  color: #000;
+}
+
+.close:focus {
+  outline: none;
 }

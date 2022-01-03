@@ -16,6 +16,7 @@ import GemInfo from "./GemInfo/GemInfo";
 import Profile from "./ProfileCard/Profile";
 import Filter from "./FilterCard/Filter";
 import ReviewCard from "./ReviewCard/ReviewCard";
+import TopBar from "./TopBar/TopBar";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -28,6 +29,7 @@ const Map = () => {
     closeForm,
   } = useModal();
 
+  const [bookmark, setBookmark] = useState(false);
   const [selected, setSelected] = useState(null);
   const [userPos, setUserPos] = useState([]);
   const [distFilter, setDistFilter] = useState(Infinity);
@@ -181,7 +183,6 @@ const Map = () => {
     const lngDist = toRad(lng - userPos[1]);
     const lat1 = toRad(userPos[0]);
     const lat2 = toRad(lat);
-
     var a =
       Math.sin(latDist / 2) * Math.sin(latDist / 2) +
       Math.sin(lngDist / 2) *
@@ -347,7 +348,31 @@ const Map = () => {
               }}
             >
               <div>
-                <h3>{selected.name}</h3>
+                <h3>
+                  {selected.name}{" "}
+                  {!bookmark && (
+                    <i
+                      style={{
+                        color: "#8ab1f5",
+                        fontSize: "25px",
+                        cursor: "pointer",
+                      }}
+                      class="far fa-bookmark"
+                      onClick={() => setBookmark(!bookmark)}
+                    ></i>
+                  )}
+                  {bookmark && (
+                    <i
+                      style={{
+                        color: "#4285f4",
+                        fontSize: "25px",
+                        cursor: "pointer",
+                      }}
+                      class="fas fa-bookmark"
+                      onClick={() => setBookmark(!bookmark)}
+                    ></i>
+                  )}
+                </h3>
                 <h6>
                   {calcDist(selected.lat, selected.lng).toFixed(2)} miles from
                   you
@@ -386,11 +411,14 @@ const Map = () => {
                 />
               </div>
             </div>
-            <ReviewCard gem={selected} />
+            {calcDist(selected.lat, selected.lng) < 0.11 && (
+              <ReviewCard gem={selected} />
+            )}
           </Popup>
         ) : null}
-        <Nav event={dropGem} openGem={() => setShowGems(!showGems)} />
       </MapGL>
+      <TopBar />
+      <Nav event={dropGem} openGem={() => setShowGems(!showGems)} />
       {displayProfile && <Profile />}
       {displayGemForm && <GemForm location={userPos} dropGem={dropGem} />}
       {displayGems && <GemInfo data={data} />}

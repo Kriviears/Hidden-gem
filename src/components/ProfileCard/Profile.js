@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GemCard from "../GemCard/GemCard";
 import classes from "./Profile.module.css";
+import useModal from "../../hooks/useModals";
 
 import test from "./test.png";
 
@@ -119,12 +120,22 @@ const user = {
 };
 
 function Profile() {
+  const { closeProfile } = useModal();
   const [bookmarks, setBookmarks] = useState(false);
   const [activity, setActivity] = useState(false);
   const [myGems, setMyGems] = useState(false);
 
   return (
     <div className={classes.container}>
+      <button onClick={closeProfile} className={classes.close}>
+        <i class="fas fa-times"></i>
+      </button>
+      <button
+        onClick={() => console.log("I will open some settings window.")}
+        className={classes.settings}
+      >
+        <i class="fas fa-cog"></i>
+      </button>
       <img className={classes.icon} src={test} alt="avatar icon" />
       <h2>Hi {user.firstName}!</h2>
       <p>

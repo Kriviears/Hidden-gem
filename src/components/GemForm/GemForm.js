@@ -26,6 +26,9 @@ function GemForm(props) {
 
   return (
     <div className={classes.container}>
+      <button onClick={closeForm} className={classes.close}>
+        <i class="fas fa-times"></i>
+      </button>
       <form>
         <h4 className={classes.title}>
           Share Your Hidden Gem <i class="far fa-gem"></i>
@@ -149,7 +152,6 @@ function GemForm(props) {
               onClick={(e) => setSelected(e.target.value)}
             />
             <span>
-              {/* <i class="fas fa-golf-ball"></i> */}
               <i class="fas fa-basketball-ball"></i>
             </span>
           </label>
