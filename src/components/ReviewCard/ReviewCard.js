@@ -1,23 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./ReviewCard.module.css";
-import "../GemForm/radio.css";
 
-function ReviewCard() {
+function ReviewCard(props) {
+  const [selected, setSelected] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({
+      gem: props.gem.name,
+      rating: selected,
+    });
+  };
+
   return (
     <div className={classes.card}>
-      <form>
+      <form className={classes.form}>
         <label className={classes.radio}>
-          <input type="radio" value="Good" />
+          <input
+            className={classes.icon}
+            name="rating"
+            type="radio"
+            value="Good"
+            onClick={(e) => setSelected(e.target.value)}
+          />
           <span>
             <i class="fas fa-thumbs-up"></i>
           </span>
         </label>
         <label className={classes.radio}>
-          <input type="radio" value="Good" />
+          <input
+            className={classes.icon}
+            name="rating"
+            type="radio"
+            value="Bad"
+            onClick={(e) => setSelected(e.target.value)}
+          />
           <span>
             <i class="fas fa-thumbs-down"></i>
           </span>
         </label>
+        <button className={classes.send} onClick={handleSubmit} type="submit">
+          <i class="fas fa-arrow-right"></i>
+        </button>
       </form>
     </div>
   );

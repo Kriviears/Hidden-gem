@@ -1,4 +1,4 @@
-.nav_container {
+.container {
   position: absolute;
   bottom: 0;
 }
@@ -23,6 +23,10 @@
   box-shadow: 12px 12px 24px rgba(18, 29, 28, 0.64);
 }
 
+.btn:focus {
+  outline: none;
+}
+
 .btn:hover {
   transform: translateY(-6px);
 }
@@ -39,7 +43,12 @@
   cursor: pointer;
   outline: none;
   position: relative;
-  padding: 15px;
+  width: 7rem;
+  height: 7rem;
+}
+
+.gem:active {
+  outline: none;
 }
 
 .gem:hover,
@@ -48,6 +57,7 @@
   transform: translateY(-6px);
   border: 6px solid #00ffcb;
   box-shadow: 0 0 60px rgba(0, 255, 203, 0.64);
+  outline: none;
 }
 
 .gem:hover::before,

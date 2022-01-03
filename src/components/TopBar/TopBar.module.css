@@ -1,0 +1,25 @@
+.top {
+  position: absolute;
+  top: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn {
+  border: 3px solid #4fd1c5;
+  /* height: 40px;
+  width: 10%; */
+  background: #fff;
+  color: #000;
+  font-size: 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  /* box-shadow: 12px 12px 24px rgba(18, 29, 28, 0.64); */
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.btn:focus {
+  outline: none;
+}

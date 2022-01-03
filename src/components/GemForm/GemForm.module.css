@@ -17,8 +17,10 @@
 }
 
 .title {
+  margin-top: 40px;
+  margin-bottom: 20px;
   font-size: 1.5rem;
-  color: #8ab1f5;
+  color: #4285f4;
 }
 
 .title i {
@@ -29,6 +31,7 @@
   position: relative;
   padding: 15px 0 0;
   margin-top: 10px;
+  margin-bottom: 8px;
 }
 
 .input {
@@ -55,12 +58,36 @@
 
 .radio {
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 .radio input {
   opacity: 0;
   position: absolute;
+}
+
+.icon {
+  opacity: 0;
+  position: absolute;
+}
+
+.icon + span {
+  font-size: 25px;
+  color: #8ab1f5;
+  border-radius: 50%;
+  padding: 12px;
+  transition: all 0.4s;
+  margin-top: 5px;
+}
+
+.icon:checked + span {
+  color: #d9e7fd;
+  background-color: #4285f4;
+}
+
+.icon:focus + span {
+  color: #fff;
 }
 
 .textarea {
@@ -97,7 +124,8 @@
   cursor: pointer;
   outline: none;
   position: relative;
-  padding: 15px;
+  height: 80px;
+  width: 80px;
 }
 
 .gem:hover,
@@ -106,6 +134,7 @@
   transform: translateY(-6px);
   border: 6px solid #00ffcb;
   box-shadow: 0 0 60px rgba(0, 255, 203, 0.64);
+  outline: none;
 }
 
 .gem:hover::before,
@@ -125,7 +154,6 @@
   cursor: pointer;
   outline: none;
   position: relative;
-  padding: 15px;
 }
 
 .cancel:hover,
@@ -134,9 +162,30 @@
   transform: translateY(-6px);
   border: 6px solid #f55a5a;
   box-shadow: 0 0 60px rgba(240, 88, 88, 0.64);
+  outline: none;
 }
 
 .cancel:hover::before,
 .cancel:focus::before {
   opacity: 1;
+}
+
+.close {
+  position: absolute;
+  left: 0;
+  font-size: 30px;
+  color: #747474;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: all 1s;
+}
+
+.close:hover {
+  transform: rotate(180deg);
+  color: #000;
+}
+
+.close:focus {
+  outline: none;
 }

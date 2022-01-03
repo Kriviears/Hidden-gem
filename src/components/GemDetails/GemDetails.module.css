@@ -1,0 +1,13 @@
+.details {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-bottom: #8ab1f5 2px solid;
+}
+
+.details p,
+.details h1 {
+  margin-bottom: 0;
+}
