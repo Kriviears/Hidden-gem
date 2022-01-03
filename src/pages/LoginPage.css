@@ -2,7 +2,6 @@
 @media all and (min-width: 480px) {
   
     .login_form {
-      background-color: lightblue;
       display: flex;
       flex: 50%;
       align-items: center;
