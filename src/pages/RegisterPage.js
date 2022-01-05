@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { NavLink, Form, Col, Button } from "react-bootstrap";
-import "./RegisterPage.css";
+import classes from "./RegisterPage.module.css";
 
 const RegisterPage = () => {
   // States for individual registration
@@ -84,7 +85,6 @@ const RegisterPage = () => {
       userName: userName,
       email: email,
       password: password,
-      confirmPassword: confirmPassword,
       city: city,
       // whichState: whichState,
     };
@@ -108,7 +108,7 @@ const RegisterPage = () => {
   const successMessage = () => {
     return (
       <div
-        className="success"
+        className={classes.success}
         style={{
           display: submitted ? "" : "none",
         }}
@@ -123,7 +123,7 @@ const RegisterPage = () => {
     if (password !== confirmPassword) {
       return (
         <div
-          className="error"
+          className={classes.error}
           style={{
             display: error ? "" : "none",
           }}
@@ -134,7 +134,7 @@ const RegisterPage = () => {
     } else {
       return (
         <div
-          className="error"
+          className={classes.error}
           style={{
             display: error ? "" : "none",
           }}
@@ -147,13 +147,11 @@ const RegisterPage = () => {
 
   //  JSX ***  *** *** JSX *** *** *** JSX  ***/
   return (
-    <div className="reg_form">
-      <div>
-        <h2>Sign Up</h2>
-      </div>
+    <div className={classes.form}>
+      <h2 className={classes.title}>Sign Up For Hidden Gems</h2>
 
       {/* Calling to the methods */}
-      <div className="messages">
+      <div className={classes.messages}>
         {errorMessage()}
         {successMessage()}
       </div>
@@ -161,87 +159,68 @@ const RegisterPage = () => {
       <form>
         {/* Labels and inputs for form data */}
         <Form.Group as={Col}>
-          <Form.Label className="reg_label">Full Name</Form.Label>
+          {/* <Form.Label className={classes.label}>Full Name</Form.Label>
           <Form.Control
             onChange={handleFullName}
-            className="input"
+            className={classes.input}
             value={fullName}
             name="fullName"
             type="text"
             required
-          />
-        </Form.Group>
+          /> */}
 
-        <Form.Group as={Col}>
-          <Form.Label className="reg_label">User Name</Form.Label>
+          <Form.Label className={classes.label}>User Name</Form.Label>
           <Form.Control
             onChange={handleUserName}
-            className="input"
+            className={classes.input}
             name="userName"
             value={userName}
             type="text"
             required
           />
-        </Form.Group>
 
-        <Form.Group as={Col}>
-          <Form.Label className="reg_label">Email</Form.Label>
+          <Form.Label className={classes.label}>Email</Form.Label>
           <Form.Control
             onChange={handleEmail}
-            className="input"
+            className={classes.input}
             value={email}
             type="email"
             required
           />
-        </Form.Group>
 
-        <Form.Group as={Col}>
-          <Form.Label className="reg_label">Password</Form.Label>
+          <Form.Label className={classes.label}>Password</Form.Label>
           <Form.Control
             onChange={handlePassword}
             placeholder="At least 8 characters "
-            className="input"
+            className={classes.input}
             value={password}
             type="password"
             required
           />
-        </Form.Group>
 
-        <Form.Group as={Col}>
-          <label className="reg_label">Confirm Password</label>
-          <input
+          <Form.Label className={classes.label}>Confirm Password</Form.Label>
+          <Form.Control
             onChange={handleConfirmPassword}
-            className="input"
+            className={classes.input}
             value={confirmPassword}
             type="password"
             required
           />
-        </Form.Group>
 
-        <Form.Group as={Col}>
-          <label className="reg_label">City</label>
-          <input
+          <Form.Label className={classes.label}>City</Form.Label>
+          <Form.Control
             onChange={handleCity}
-            className="input"
+            className={classes.input}
             value={city}
             type="text"
             required
           />
-        </Form.Group>
 
-        {/* <label className="reg_label">State</label>
-        <input
-          onChange={handleWhichState}
-          className="input"
-          value={whichState}
-          type="text"
-          required
-        /> */}
-
-        <form>
           <fieldset>
-            <label for="state">State</label>
-            <select id="state" name="state">
+            <Form.Label className={classes.label} for="state">
+              State
+            </Form.Label>
+            <select className={classes.input} id="state" name="state">
               <option value="---">---</option>
               <option value="Alabama">Alabama</option>
               <option value="Alaska">Alaska</option>
@@ -254,7 +233,6 @@ const RegisterPage = () => {
               <option value="District of Columbia">District of Columbia</option>
               <option value="Florida">Florida</option>
               <option value="Georgia">Georgia</option>
-              <option value="Guam">Guam</option>
               <option value="Hawaii">Hawaii</option>
               <option value="Idaho">Idaho</option>
               <option value="Illinois">Illinois</option>
@@ -283,7 +261,6 @@ const RegisterPage = () => {
               <option value="Oklahoma">Oklahoma</option>
               <option value="Oregon">Oregon</option>
               <option value="Pennsylvania">Pennsylvania</option>
-              <option value="Puerto Rico">Puerto Rico</option>
               <option value="Rhode Island">Rhode Island</option>
               <option value="South Carolina">South Carolina</option>
               <option value="South Dakota">South Dakota</option>
@@ -292,31 +269,26 @@ const RegisterPage = () => {
               <option value="Utah">Utah</option>
               <option value="Vermont">Vermont</option>
               <option value="Virginia">Virginia</option>
-              <option value="Virgin Islands">Virgin Islands</option>
               <option value="Washington">Washington</option>
               <option value="West Virginia">West Virginia</option>
               <option value="Wisconsin">Wisconsin</option>
               <option value="Wyoming">Wyoming</option>
             </select>
           </fieldset>
-
-          <Button
-            onClick={handleSubmit}
-            bg="secondary"
-            type="submit"
-            disabled={!validateForm()}
-          >
-            Submit
-          </Button>
-        </form>
-
-        <NavLink
-          style={{ cursor: "pointer" }}
-          onClick={() => console.log("Link to Login Page")}
-        >
-          Have an account? Log in
-        </NavLink>
+        </Form.Group>
       </form>
+      <Button
+        style={{ marginTop: "10px", width: "300px" }}
+        onClick={handleSubmit}
+        bg="secondary"
+        type="submit"
+        disabled={!validateForm()}
+      >
+        Submit
+      </Button>
+      <Link to="/login">
+        <p>Have an account? Log in</p>
+      </Link>
     </div>
   );
 };

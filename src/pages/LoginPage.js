@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Form, Col, Button, NavLink } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useProvideAuth } from "../hooks/useAuth";
+import { Form, Col, Button } from "react-bootstrap";
 
-import "./LoginPage.css";
+import classes from "./LoginPage.module.css";
 
 const LoginPage = () => {
+  const { login } = useProvideAuth();
   // States for individual registration
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,32 +31,25 @@ const LoginPage = () => {
   };
 
   // FUNCTION Handling the submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email === "" || password === "") {
-      setError(true);
-    } else {
-      setSubmitted(true);
-      setError(false);
+    try {
+      const res = await login(email, password);
+    } catch (err) {
+      console.log(err.message);
     }
-
-    let dataObject = {
-      email: email,
-      password: password,
-    };
-    console.log(dataObject);
   };
 
   // Showing success message
   const successMessage = () => {
     return (
       <div
-        className="login_success"
+        className={classes.success}
         style={{
           display: submitted ? "" : "none",
         }}
       >
-        <h2> You're logged in</h2>
+        <h2>You're logged in</h2>
       </div>
     );
   };
@@ -62,7 +58,7 @@ const LoginPage = () => {
   const errorMessage = () => {
     return (
       <div
-        className="error"
+        className={classes.error}
         style={{
           display: error ? "" : "none",
         }}
@@ -74,13 +70,13 @@ const LoginPage = () => {
 
   //  JSX ***  *** *** JSX *** *** *** JSX  ***/
   return (
-    <div className="login_form">
+    <div className={classes.form}>
       <div>
-        <h2>Sign In</h2>
+        <h2 className={classes.title}>Sign In To Hidden Gems</h2>
       </div>
 
       {/* Calling to the methods */}
-      <div className="messages">
+      <div className={classes.messages}>
         {errorMessage()}
         {successMessage()}
       </div>
@@ -88,44 +84,38 @@ const LoginPage = () => {
       <form>
         {/* Labels and inputs for form data */}
         <Form.Group as={Col}>
-          <Form.Label className="reg_label">Email</Form.Label>
+          <Form.Label className={classes.label}>Email</Form.Label>
           <Form.Control
             onChange={handleEmail}
-            className="input"
+            className={classes.input}
             value={email}
             type="email"
             required
           />
-        </Form.Group>
 
-        <Form.Group as={Col}>
-          <Form.Label className="reg_label">Password</Form.Label>
+          <Form.Label className={classes.label}>Password</Form.Label>
           <Form.Control
             onChange={handlePassword}
             placeholder="At least 8 characters "
-            className="input"
+            className={classes.input}
             value={password}
             type="password"
             required
           />
         </Form.Group>
-
-        <Button
-          onClick={handleSubmit}
-          bg="secondary"
-          type="submit"
-          disabled={!validateForm()}
-        >
-          Sign In
-        </Button>
       </form>
-
-      <NavLink
-        style={{ cursor: "pointer" }}
-        onClick={() => console.log("Link to register")}
+      <Button
+        style={{ marginTop: "10px", width: "300px" }}
+        onClick={handleSubmit}
+        bg="secondary"
+        type="submit"
+        disabled={!validateForm()}
       >
-        No account? Sign Up!
-      </NavLink>
+        Sign In
+      </Button>
+      <Link to="/register">
+        <p className={classes.link}>No account? Sign Up!</p>
+      </Link>
     </div>
   );
 };

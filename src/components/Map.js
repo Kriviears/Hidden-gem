@@ -7,6 +7,7 @@ import MapGL, {
   NavigationControl,
 } from "react-map-gl";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import axios from "../utils/axiosConfig";
 import "react-circular-progressbar/dist/styles.css";
 import useModal from "../hooks/useModals";
 import Geocoder from "react-map-gl-geocoder";
@@ -136,7 +137,7 @@ const Map = () => {
       {
         lat: 40.6892,
         lng: -74.0445,
-        name: "The Statue of Libery",
+        name: "The Statue of Liberty",
         category: "Sight Seeing",
         likes: 82,
         reviews: 103,
@@ -144,6 +145,11 @@ const Map = () => {
       },
     ]);
   }, []);
+
+  const getGems = async () => {
+    const gems = await axios.get(`/gems`);
+    console.log(gems.data);
+  };
 
   const [viewport, setViewport] = useState({
     width: "100vw",
@@ -418,7 +424,8 @@ const Map = () => {
         ) : null}
       </MapGL>
       <TopBar />
-      <Nav event={dropGem} openGem={() => setShowGems(!showGems)} />
+      {/* <Nav event={dropGem} openGem={() => setShowGems(!showGems)} /> */}
+      <Nav event={getGems} openGem={() => setShowGems(!showGems)} />
       {displayProfile && <Profile />}
       {displayGemForm && <GemForm location={userPos} dropGem={dropGem} />}
       {displayGems && <GemInfo data={data} />}

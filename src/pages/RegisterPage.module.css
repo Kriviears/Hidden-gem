@@ -1,0 +1,52 @@
+.form {
+  display: flex;
+  flex: 50%;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  margin-top: 15px;
+}
+
+.title {
+  margin-top: 15px;
+}
+
+.label {
+  display: block;
+  font-size: 20px;
+  color: black;
+  margin-top: 5px;
+  margin-bottom: -2px;
+  flex: 50%;
+}
+
+.input {
+  font-size: 16px;
+  width: 300px;
+  padding: 5px;
+  margin: 2px;
+}
+
+.messages {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  display: block;
+  background-color: red;
+  color: white;
+  width: fit-content;
+  height: 50px;
+  padding: 5px;
+  margin: auto;
+}
+
+.success {
+  display: block;
+  color: black;
+  width: fit-content;
+  height: 40px;
+  padding: 5px;
+}
