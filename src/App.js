@@ -1,5 +1,6 @@
 import "./App.css";
 import Map from "./components/Map";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (

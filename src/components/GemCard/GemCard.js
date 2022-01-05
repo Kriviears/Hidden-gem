@@ -75,8 +75,8 @@ function GemCard({ data }) {
             )}
           </div>
         </div>
-      </div>
       {details && <GemDetails data={data} />}
+      </div>
     </>
   );
 }

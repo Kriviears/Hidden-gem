@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./GemDetails.module.css";
 
 function GemDetails({ data }) {
+  console.log(data)
   return (
     <div className={classes.details}>
       <div>
