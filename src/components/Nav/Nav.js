@@ -12,8 +12,8 @@ function Nav(props) {
         </button>
         <button className={classes.btn}>Button</button>
         <button
-          onClick={toggleForm}
-          // onClick={props.event}
+          // onClick={toggleForm}
+          onClick={props.event}
           className={classes.gem}
         >
           <i class="far fa-gem"></i>

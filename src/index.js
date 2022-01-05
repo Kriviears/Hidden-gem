@@ -3,13 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { ManagedModalContext } from "./hooks/useModals";
+import { ProvideAuth } from "./hooks/useAuth";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ManagedModalContext>
-      <App />
-    </ManagedModalContext>
+    <ProvideAuth>
+      <ManagedModalContext>
+        <App />
+      </ManagedModalContext>
+    </ProvideAuth>
   </React.StrictMode>,
   document.getElementById("root")
 );

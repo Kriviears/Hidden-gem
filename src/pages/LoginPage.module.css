@@ -1,35 +1,39 @@
-
-.reg_form {
-    display: flex;
-    flex: 50%;
-    align-items: center;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
+.form {
+  display: flex;
+  flex: 50%;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  margin-top: 15px;
 }
 
+.title {
+  margin-top: 15px;
+}
 
-.reg_label{
+.label {
   display: block;
-  font-size: small;
-  color: white;
-  padding: 5px;
+  font-size: 20px;
+  color: black;
+  margin-top: 5px;
+  margin-bottom: -2px;
   flex: 50%;
 }
-  
-.input{
-  font-size: small;
+
+.input {
+  font-size: 16px;
+  width: 300px;
   padding: 5px;
   margin: 2px;
-   
 }
-  
-.messages{
+
+.messages {
   display: flex;
   justify-content: center;
 }
-  
-.error{
+
+.error {
   display: block;
   background-color: red;
   color: white;
@@ -38,11 +42,11 @@
   padding: 5px;
   margin: auto;
 }
-  
-.success{
+
+.success {
   display: block;
   color: black;
   width: fit-content;
   height: 40px;
   padding: 5px;
-} */
+}
