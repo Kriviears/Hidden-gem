@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Container, Row} from "react-bootstrap";
+import { Link } from "react-router-dom"
 import classes from "./LandingPage.module.css";
 
 const LandingPage = () => {
@@ -8,18 +9,27 @@ const LandingPage = () => {
       <h2 className={classes.landingTitle}>
         Discover Hidden Gems Wherever You Travel
       </h2>
-      <Container>
+     
         
-          <Row className={classes.blur}>
+          <div className={classes.blur}>
             <h4 className={classes.landingInfo}>Uncover the top rated activites near you</h4>
             <h4 className={classes.landingInfo}>including unique attractions, family fun,</h4>
-            <h4 className={classes.landingInfo}>top rated romantic cafes and more! </h4>
-          </Row>
+            <h4 className={classes.landingInfo}>romantic cafes, epic adventures and more! </h4>
+          </div>
         
-      </Container>
-
-      <Button onClick={() => console.log("Link to Sign")}className={classes.landingBtn}>Sign in</Button>
-      <Button onClick={() => console.log("Link to register")} className={classes.landingBtn}>New? Register Here</Button>
+    
+      <div className={classes.flexLandingBtns}>  
+      <Link to="/login">
+      <Button
+      className={classes.landingBtn}
+      >Sign in</Button>
+      </Link>
+      
+      <Link to="/register"> 
+      <Button className={classes.landingBtn}>New? Register Here</Button>
+      </Link>
+      </div>
+    
     </div>
   );
 };
