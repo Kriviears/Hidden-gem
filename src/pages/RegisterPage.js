@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { NavLink, Form, Col, Button } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
+import { Form, Col, Button } from "react-bootstrap";
 import classes from "./RegisterPage.module.css";
 
 const RegisterPage = () => {

@@ -6,11 +6,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useProvideAuth } from "./hooks/useAuth";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import LandingPage from "./pages/LandingPage";
 
 
 function App() {
-  const { state } = useProvideAuth();
-  const { user } = state;
+  // const { state } = useProvideAuth();
+  // const { user } = state;
+  const user = false
 
   return (
     <Router>
@@ -26,7 +28,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/" element={<RegisterPage />} />
+            <Route path="/" element={<LandingPage />} />
           </Routes>
         )}
       </div>

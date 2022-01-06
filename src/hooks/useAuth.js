@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect, useContext, createContext } from "react";
-import { useHistory } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "../utils/axiosConfig";
 
 const initialState = {
@@ -48,7 +48,7 @@ export const useAuth = () => {
 };
 
 export function useProvideAuth() {
-  let history = useHistory();
+  // let history = useNavigate();
   const { state, dispatch } = useAuth();
   //maybe router
 
@@ -87,7 +87,7 @@ export function useProvideAuth() {
     dispatch({
       type: "LOGOUT",
     });
-    history.pushState("/");
+    // history.pushState("/");
   };
 
   const getCurrentUser = () => {
