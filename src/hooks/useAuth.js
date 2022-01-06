@@ -1,5 +1,7 @@
 import React, { useReducer, useEffect, useContext, createContext } from "react";
-// import { useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
+
 import axios from "../utils/axiosConfig";
 
 const initialState = {
@@ -48,9 +50,8 @@ export const useAuth = () => {
 };
 
 export function useProvideAuth() {
-  // let history = useNavigate();
+  const navigate = useNavigate();
   const { state, dispatch } = useAuth();
-  //maybe router
 
   const login = async (email, password) => {
     try {
@@ -68,18 +69,16 @@ export function useProvideAuth() {
       throw new Error(err.message);
     }
   };
-  const signup = async (username, password, email, city, state) => {
+  const signup = async (username, email, password) => {
     try {
       await axios.post(`auth/register`, {
         username,
-        password,
         email,
-        city,
-        state,
+        password,
       });
-      return await login(username, password);
+      //   return await login(email, password);
     } catch (err) {
-      throw new Error(err.message);
+      throw new Error(err);
     }
   };
 
@@ -87,7 +86,8 @@ export function useProvideAuth() {
     dispatch({
       type: "LOGOUT",
     });
-    // history.pushState("/");
+    navigate("/");
+
   };
 
   const getCurrentUser = () => {

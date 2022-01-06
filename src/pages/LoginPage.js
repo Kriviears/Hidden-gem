@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useProvideAuth } from "../hooks/useAuth";
+import { setAuthToken } from "../utils/axiosConfig";
 import { Form, Col, Button } from "react-bootstrap";
 
 import classes from "./LoginPage.module.css";
 
 const LoginPage = () => {
   const { login } = useProvideAuth();
+  const navigate = useNavigate();
   // States for individual registration
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +37,8 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const res = await login(email, password);
+      setAuthToken(res.token);
+      navigate("/");
     } catch (err) {
       console.log(err.message);
     }

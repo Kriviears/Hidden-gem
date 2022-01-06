@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useProvideAuth } from "../../hooks/useAuth";
 import GemCard from "../GemCard/GemCard";
 import classes from "./Profile.module.css";
 import useModal from "../../hooks/useModals";
@@ -121,6 +122,7 @@ const user = {
 
 function Profile() {
   const { closeProfile } = useModal();
+  const { logout } = useProvideAuth();
   const [bookmarks, setBookmarks] = useState(false);
   const [activity, setActivity] = useState(false);
   const [myGems, setMyGems] = useState(false);
@@ -192,6 +194,7 @@ function Profile() {
           ))}
         </div>
       )}
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }

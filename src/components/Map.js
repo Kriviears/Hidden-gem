@@ -425,7 +425,7 @@ const Map = () => {
       </MapGL>
       <TopBar />
       {/* <Nav event={dropGem} openGem={() => setShowGems(!showGems)} /> */}
-      <Nav event={getGems} openGem={() => setShowGems(!showGems)} />
+      <Nav event={dropGem} openGem={() => setShowGems(!showGems)} />
       {displayProfile && <Profile />}
       {displayGemForm && <GemForm location={userPos} dropGem={dropGem} />}
       {displayGems && <GemInfo data={data} />}
