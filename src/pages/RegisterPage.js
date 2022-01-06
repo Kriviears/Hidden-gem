@@ -1,28 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { NavLink, Form, Col, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useProvideAuth } from "../hooks/useAuth";
+import { setAuthToken } from "../utils/axiosConfig";
+import { Form, Col, Button } from "react-bootstrap";
 import classes from "./RegisterPage.module.css";
 
 const RegisterPage = () => {
   // States for individual registration
+  const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [city, setCity] = useState("");
-  // const [whichState, setwhichState] = useState("");
-  const [isMatched, setIsMatched] = useState(false);
+  //const [city, setCity] = useState("");
+
+  const { signup } = useProvideAuth();
 
   // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
 
   //Start handling functions:
-  const handleFullName = (e) => {
-    setFullName(e.target.value);
-  };
-
   const handleUserName = (e) => {
     setUserName(e.target.value);
     setSubmitted(false);
@@ -43,10 +42,10 @@ const RegisterPage = () => {
     setConfirmPassword(e.target.value);
   };
 
-  const handleCity = (e) => {
-    setCity(e.target.value);
-    setSubmitted(false);
-  };
+  // const handleCity = (e) => {
+  //   setCity(e.target.value);
+  //   setSubmitted(false);
+  // };
 
   // const handleWhichState = (e) => {
   //   setwhichState(e.target.value);
@@ -54,15 +53,13 @@ const RegisterPage = () => {
   // };
 
   // FUNCTION Handling the form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      fullName === "" ||
       userName === "" ||
       email === "" ||
       password === "" ||
       confirmPassword === "" ||
-      city === "" ||
       password !== confirmPassword
       // (whichState === "")
     ) {
@@ -70,31 +67,24 @@ const RegisterPage = () => {
     } else {
       if (password !== confirmPassword) {
         alert("Passwords do not match");
-        console.log(password, confirmPassword);
       } else {
         setSubmitted(true);
         setError(false);
       }
     }
 
-    //TOAST else?? {
-    //toast.error("Password Does Not Match");
-
-    let dataObject = {
-      fullName: fullName,
-      userName: userName,
-      email: email,
-      password: password,
-      city: city,
-      // whichState: whichState,
-    };
-    console.log(dataObject);
+    try {
+      const res = await signup(userName, email, password);
+      setAuthToken(res.token);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //funtion to validate and prevent submission:
   const validateForm = () => {
     return (
-      fullName.length > 0 &&
       email.length > 0 &&
       userName.length &&
       password.length > 5 &&
@@ -207,7 +197,7 @@ const RegisterPage = () => {
             required
           />
 
-          <Form.Label className={classes.label}>City</Form.Label>
+          {/* <Form.Label className={classes.label}>City</Form.Label>
           <Form.Control
             onChange={handleCity}
             className={classes.input}
@@ -274,7 +264,7 @@ const RegisterPage = () => {
               <option value="Wisconsin">Wisconsin</option>
               <option value="Wyoming">Wyoming</option>
             </select>
-          </fieldset>
+          </fieldset> */}
         </Form.Group>
       </form>
       <Button

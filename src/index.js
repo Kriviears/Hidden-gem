@@ -2,17 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
 import { ManagedModalContext } from "./hooks/useModals";
 import { ProvideAuth } from "./hooks/useAuth";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ProvideAuth>
-      <ManagedModalContext>
-        <App />
-      </ManagedModalContext>
-    </ProvideAuth>
+    <Router>
+      <ProvideAuth>
+        <ManagedModalContext>
+          <App />
+        </ManagedModalContext>
+      </ProvideAuth>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
