@@ -8,27 +8,29 @@ import RegisterPage from "./pages/RegisterPage";
 import LandingPage from "./pages/LandingPage";
 
 function App() {
-  const { state } = useProvideAuth();
-  const { user } = state;
+  // const { state } = useProvideAuth();
+  // const { user } = state;
+  const user = false
 
   return (
-    <div className="App">
-      {/* <Map /> */}
-      {/* <RegisterPage /> */}
-      {user && (
-        <Routes>
-          <Route path="/" element={<Map />} />
-        </Routes>
-      )}
-      {!user && (
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          {/* <Route path="/" element={<LandingPage />} /> */}
-          <Route path="/" element={<RegisterPage />} />
-        </Routes>
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        {/* <Map /> */}
+        {/* <RegisterPage /> */}
+        {user && (
+          <Routes>
+            <Route path="/" element={<Map />} />
+          </Routes>
+        )}
+        {!user && (
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/" element={<LandingPage />} />
+          </Routes>
+        )}
+      </div>
+    </Router>
   );
 }
 

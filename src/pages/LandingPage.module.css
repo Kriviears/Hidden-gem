@@ -1,11 +1,11 @@
 .landingTitle {
-    margin-top: 20px;
-    margin-bottom: 45px;
-    margin: auto;
+    margin-top: 15rem;
+    text-align: center;
+    
 }
 
 .landingContainer {
-    background-image: url("/src/images/earth_night.png");
+    background-image: url("../images/earth_gems.png");
     color: whitesmoke;
     height: 100vh;
     width: 100vw;
@@ -19,27 +19,35 @@
     margin-bottom: 40px;
 }
 .blur {
-    height: 20vh;
-    width: 30vw;
+    height: 15vh;
+    width: 35vw;
     min-width: 300px;
     backdrop-filter: blur(6px);
     background:transparent;
     text-align: center;
-    margin-bottom: 40px; 
+    margin-bottom: 10px; 
     margin: auto;
 }
 
 .landingInfo {
     text-align: center;
-    margin-top: -2px;
-    margin-bottom: -2px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     margin: auto
+}
+.flexLandingBtns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 35px;
+
 }
 
 .landingBtn {
     border: 3px solid rgb(15, 187, 245);
-    height: 50px;
-    width: 30%;
+    height: 4rem;
+    width: 20.5rem;
     margin-bottom: 10px;
     background: rgb(2, 2, 100);
     color:white;

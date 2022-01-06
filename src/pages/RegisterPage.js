@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useProvideAuth } from "../hooks/useAuth";
 import { setAuthToken } from "../utils/axiosConfig";
+
 import { Form, Col, Button } from "react-bootstrap";
 import classes from "./RegisterPage.module.css";
 

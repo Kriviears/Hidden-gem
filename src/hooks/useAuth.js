@@ -1,5 +1,7 @@
 import React, { useReducer, useEffect, useContext, createContext } from "react";
+
 import { useNavigate } from "react-router-dom";
+
 import axios from "../utils/axiosConfig";
 
 const initialState = {
@@ -85,6 +87,7 @@ export function useProvideAuth() {
       type: "LOGOUT",
     });
     navigate("/");
+
   };
 
   const getCurrentUser = () => {
