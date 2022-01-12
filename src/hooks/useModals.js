@@ -5,6 +5,8 @@ const initialState = {
   displayFilter: false,
   displayProfile: false,
   displayGems: false,
+  displayMapStyle: false,
+  displaySettings: false,
 };
 
 export const ModalContext = createContext(initialState);
@@ -35,6 +37,15 @@ function modalReducer(state, action) {
     case "CLOSE_GEMS": {
       return { ...initialState };
     }
+    case "OPEN_STYLE": {
+      return { ...initialState, displayMapStyle: true };
+    }
+    case "CLOSE_STYLE": {
+      return { ...initialState };
+    }
+    case "OPEN_SETTINGS": {
+      return { ...initialState, displaySettings: true };
+    }
     default:
       return state;
   }
@@ -57,6 +68,11 @@ export const ModalProvider = (props) => {
   const openGems = () => dispatchModal({ type: "OPEN_GEMS" });
   const closeGems = () => dispatchModal({ type: "CLOSE_GEMS" });
   const toggleGems = () => (state.displayGems ? closeGems() : openGems());
+  const openStyle = () => dispatchModal({ type: "OPEN_STYLE" });
+  const closeStyle = () => dispatchModal({ type: "CLOSE_STYLE" });
+  const toggleStyle = () =>
+    state.displayMapStyle ? closeStyle() : openStyle();
+  const openSettings = () => dispatchModal({ type: "OPEN_SETTINGS" });
 
   const value = useMemo(
     () => ({
@@ -73,6 +89,10 @@ export const ModalProvider = (props) => {
       openGems,
       closeGems,
       toggleGems,
+      openStyle,
+      closeStyle,
+      toggleStyle,
+      openSettings,
     }),
     [state]
   );

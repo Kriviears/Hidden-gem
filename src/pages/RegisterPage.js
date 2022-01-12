@@ -79,6 +79,7 @@ const RegisterPage = () => {
       const res = await signup(userName, email, password);
       setAuthToken(res.token);
       navigate("/");
+      // navigate("/login");
     } catch (error) {
       console.error(error);
     }

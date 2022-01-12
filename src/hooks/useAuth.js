@@ -76,7 +76,7 @@ export function useProvideAuth() {
         email,
         password,
       });
-      //   return await login(email, password);
+      return await login(email, password);
     } catch (err) {
       throw new Error(err);
     }
@@ -87,7 +87,6 @@ export function useProvideAuth() {
       type: "LOGOUT",
     });
     navigate("/");
-
   };
 
   const getCurrentUser = () => {

@@ -1,49 +1,129 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useProvideAuth } from "../../hooks/useAuth";
+import axios from "../../utils/axiosConfig";
 import classes from "./ReviewCard.module.css";
 
-function ReviewCard(props) {
+function ReviewCard({ data, setSelect }) {
   const [selected, setSelected] = useState(null);
+  const { state } = useProvideAuth();
+  const { user } = state;
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [tempVote, setTempVote] = useState(null);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await axios.get(`users/${user.uid}`);
+        setCurrentUser(response.data);
+        setLoading(false);
+        console.log(currentUser);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getUser();
+  }, [user]);
+
+  if (!loading && !tempVote) {
+    if (currentUser.gemLikes.includes(data._id)) {
+      setTempVote("like");
+    }
+    if (currentUser.gemDislikes.includes(data._id)) {
+      setTempVote("dislike");
+    }
+  }
+
+  const changeVote = async (e) => {
     e.preventDefault();
-    console.log({
-      gem: props.gem.name,
-      rating: selected,
-    });
+    setSelect(null);
+    try {
+      const response = await axios.post(
+        `/gems/${tempVote}/${data._id}/${user.uid}`
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+    setSelect(data);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSelect(null);
+    try {
+      const response = await axios.post(
+        `/gems/${selected}/${data._id}/${user.uid}`
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+    setSelect(data);
   };
 
   return (
-    <div className={classes.card}>
-      <form className={classes.form}>
-        <label className={classes.radio}>
-          <input
-            className={classes.icon}
-            name="rating"
-            type="radio"
-            value="Good"
-            onClick={(e) => setSelected(e.target.value)}
-          />
-          <span>
+    <>
+      {loading ? (
+        <></>
+      ) : currentUser.gemLikes.includes(data._id) ? (
+        <div>
+          <span className={classes.voted}>
             <i class="fas fa-thumbs-up"></i>
           </span>
-        </label>
-        <label className={classes.radio}>
-          <input
-            className={classes.icon}
-            name="rating"
-            type="radio"
-            value="Bad"
-            onClick={(e) => setSelected(e.target.value)}
-          />
-          <span>
+          <button className={classes.cancel} onClick={changeVote}>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      ) : currentUser.gemDislikes.includes(data._id) ? (
+        <div>
+          <span className={classes.voted}>
             <i class="fas fa-thumbs-down"></i>
           </span>
-        </label>
-        <button className={classes.send} onClick={handleSubmit} type="submit">
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </form>
-    </div>
+          <button className={classes.cancel} onClick={changeVote}>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      ) : (
+        <div className={classes.card}>
+          <form className={classes.form}>
+            <label className={classes.radio}>
+              <input
+                className={classes.icon}
+                name="rating"
+                type="radio"
+                value="like"
+                onClick={(e) => setSelected(e.target.value)}
+              />
+              <span>
+                <i class="fas fa-thumbs-up"></i>
+              </span>
+            </label>
+            <label className={classes.radio}>
+              <input
+                className={classes.icon}
+                name="rating"
+                type="radio"
+                value="dislike"
+                onClick={(e) => setSelected(e.target.value)}
+              />
+              <span>
+                <i class="fas fa-thumbs-down"></i>
+              </span>
+            </label>
+            {selected && (
+              <button
+                className={classes.send}
+                onClick={handleSubmit}
+                type="submit"
+              >
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            )}
+          </form>
+        </div>
+      )}
+    </>
   );
 }
 
