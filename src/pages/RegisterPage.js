@@ -10,12 +10,12 @@ import classes from "./RegisterPage.module.css";
 const RegisterPage = () => {
   // States for individual registration
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState("");
+  // const [fullName, setFullName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  //const [city, setCity] = useState("");
+  
 
   const { signup } = useProvideAuth();
 
@@ -24,6 +24,11 @@ const RegisterPage = () => {
   const [error, setError] = useState(false);
 
   //Start handling functions:
+  // const handleFullName = (e) => {
+  //   setUserName(e.target.value);
+  //   setSubmitted(false);
+  // };
+  
   const handleUserName = (e) => {
     setUserName(e.target.value);
     setSubmitted(false);
@@ -44,26 +49,19 @@ const RegisterPage = () => {
     setConfirmPassword(e.target.value);
   };
 
-  // const handleCity = (e) => {
-  //   setCity(e.target.value);
-  //   setSubmitted(false);
-  // };
 
-  // const handleWhichState = (e) => {
-  //   setwhichState(e.target.value);
-  //   setSubmitted(false);
-  // };
 
   // FUNCTION Handling the form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
+      // fullName === "" ||
       userName === "" ||
       email === "" ||
       password === "" ||
       confirmPassword === "" ||
       password !== confirmPassword
-      // (whichState === "")
+  
     ) {
       setError(true);
     } else {
@@ -87,6 +85,7 @@ const RegisterPage = () => {
   //funtion to validate and prevent submission:
   const validateForm = () => {
     return (
+      // fullName.length > 0 &&
       email.length > 0 &&
       userName.length &&
       password.length > 5 &&
@@ -94,7 +93,6 @@ const RegisterPage = () => {
     );
   };
 
-  //FIXME:  NEED TRY CATCH
 
   // Showing success message
   const successMessage = () => {
@@ -120,22 +118,15 @@ const RegisterPage = () => {
             display: error ? "" : "none",
           }}
         >
-          <h2>Pass words dont match</h2>
+          <h2>Passwords don't match</h2>
         </div>
       );
-    } else {
-      return (
-        <div
-          className={classes.error}
-          style={{
-            display: error ? "" : "none",
-          }}
-        >
-          <h1>Please enter all the fields</h1>
-        </div>
-      );
-    }
+    } 
   };
+
+  //error message and error found
+  //set error message to true 
+
 
   //  JSX ***  *** *** JSX *** *** *** JSX  ***/
   return (
@@ -151,6 +142,7 @@ const RegisterPage = () => {
       <form>
         {/* Labels and inputs for form data */}
         <Form.Group as={Col}>
+
           {/* <Form.Label className={classes.label}>Full Name</Form.Label>
           <Form.Control
             onChange={handleFullName}
@@ -199,87 +191,21 @@ const RegisterPage = () => {
             required
           />
 
-          {/* <Form.Label className={classes.label}>City</Form.Label>
-          <Form.Control
-            onChange={handleCity}
-            className={classes.input}
-            value={city}
-            type="text"
-            required
-          />
-
-          <fieldset>
-            <Form.Label className={classes.label} for="state">
-              State
-            </Form.Label>
-            <select className={classes.input} id="state" name="state">
-              <option value="---">---</option>
-              <option value="Alabama">Alabama</option>
-              <option value="Alaska">Alaska</option>
-              <option value="Arizona">Arizona</option>
-              <option value="Arkansas">Arkansas</option>
-              <option value="California">California</option>
-              <option value="Colorado">Colorado</option>
-              <option value="Connecticut">Connecticut</option>
-              <option value="Delaware">Delaware</option>
-              <option value="District of Columbia">District of Columbia</option>
-              <option value="Florida">Florida</option>
-              <option value="Georgia">Georgia</option>
-              <option value="Hawaii">Hawaii</option>
-              <option value="Idaho">Idaho</option>
-              <option value="Illinois">Illinois</option>
-              <option value="Indiana">Indiana</option>
-              <option value="Iowa">Iowa</option>
-              <option value="Kansas">Kansas</option>
-              <option value="Kentucky">Kentucky</option>
-              <option value="Louisiana">Louisiana</option>
-              <option value="Maine">Maine</option>
-              <option value="Maryland">Maryland</option>
-              <option value="Massachusetts">Massachusetts</option>
-              <option value="Michigan">Michigan</option>
-              <option value="Minnesota">Minnesota</option>
-              <option value="Mississippi">Mississippi</option>
-              <option value="Missouri">Missouri</option>
-              <option value="Montana">Montana</option>
-              <option value="Nebraska">Nebraska</option>
-              <option value="Nevada">Nevada</option>
-              <option value="New Hampshire">New Hampshire</option>
-              <option value="New Jersey">New Jersey</option>
-              <option value="New Mexico">New Mexico</option>
-              <option value="New York">New York</option>
-              <option value="North Carolina">North Carolina</option>
-              <option value="North Dakota">North Dakota</option>
-              <option value="Ohio">Ohio</option>
-              <option value="Oklahoma">Oklahoma</option>
-              <option value="Oregon">Oregon</option>
-              <option value="Pennsylvania">Pennsylvania</option>
-              <option value="Rhode Island">Rhode Island</option>
-              <option value="South Carolina">South Carolina</option>
-              <option value="South Dakota">South Dakota</option>
-              <option value="Tennessee">Tennessee</option>
-              <option value="Texas">Texas</option>
-              <option value="Utah">Utah</option>
-              <option value="Vermont">Vermont</option>
-              <option value="Virginia">Virginia</option>
-              <option value="Washington">Washington</option>
-              <option value="West Virginia">West Virginia</option>
-              <option value="Wisconsin">Wisconsin</option>
-              <option value="Wyoming">Wyoming</option>
-            </select>
-          </fieldset> */}
         </Form.Group>
       </form>
       <Button
+        className={classes.signupsButtons}
         style={{ marginTop: "10px", width: "300px" }}
         onClick={handleSubmit}
         bg="secondary"
         type="submit"
+        style={{backgroundColor: "rgb(16, 16, 75)"}}
         disabled={!validateForm()}
       >
         Submit
       </Button>
       <Link to="/login">
-        <p>Have an account? Log in</p>
+        <p className={classes.link}>Have an account? Log in</p>
       </Link>
     </div>
   );

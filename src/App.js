@@ -10,10 +10,10 @@ import LandingPage from "./pages/LandingPage";
 function App() {
   // const { state } = useProvideAuth();
   // const { user } = state;
-  const user = false
+  const user = true
 
   return (
-    <Router>
+  
       <div className="App">
         {/* <Map /> */}
         {/* <RegisterPage /> */}
@@ -30,7 +30,6 @@ function App() {
           </Routes>
         )}
       </div>
-    </Router>
   );
 }
 
