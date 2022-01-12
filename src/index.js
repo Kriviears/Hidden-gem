@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ManagedModalContext } from "./hooks/useModals";
+import { ManagedMapContext } from "./hooks/useMap";
 import { ProvideAuth } from "./hooks/useAuth";
 import reportWebVitals from "./reportWebVitals";
 
@@ -11,9 +12,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <ProvideAuth>
-        <ManagedModalContext>
-          <App />
-        </ManagedModalContext>
+        <ManagedMapContext>
+          <ManagedModalContext>
+            <App />
+          </ManagedModalContext>
+        </ManagedMapContext>
       </ProvideAuth>
     </Router>
   </React.StrictMode>,

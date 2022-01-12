@@ -56,3 +56,27 @@
   margin-top: 5px;
   background: #8bf182;
 }
+
+.send:focus,
+.send:active {
+  outline: none;
+}
+
+.voted {
+  font-size: 25px;
+  border-radius: 50%;
+  padding: 12px;
+  margin-top: 5px;
+  color: #d9e7fd;
+  background-color: #4285f4;
+}
+
+.cancel {
+  font-size: 25px;
+  border: none;
+  border-radius: 50%;
+  height: 53px;
+  width: 53px;
+  background: #e68f8f;
+  margin-left: 5px;
+}
