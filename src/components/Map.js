@@ -306,7 +306,7 @@ const Map = () => {
           {/* <TopBar /> */}
           <Nav event={dropGem} openGem={() => setShowGems(!showGems)} />
           {displayProfile && <Profile />}
-          {displayGemForm && <GemForm location={userPos} dropGem={dropGem} />}
+          {displayGemForm && <GemForm location={userPos} setLocation={setLocation} />}
           {displayGems && <GemInfo data={data} />}
           {displayFilter && <Filter />}
           {displayMapStyle && <MapStyle />}
