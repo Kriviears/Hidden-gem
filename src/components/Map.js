@@ -319,6 +319,7 @@ const Map = () => {
           )}
           {displayGems && <GemInfo data={data} setLocation={setLocation} />}
           {displayFilter && <Filter location={userPos} setData={setData} />}
+
           {displayMapStyle && <MapStyle />}
           {displaySettings && <Settings />}
         </>

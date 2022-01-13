@@ -30,8 +30,8 @@ function GemForm({ location, setLocation }) {
       description: descRef.current.value,
     };
     const res = await axios.post("/gems", dataObj);
-    console.log(res.data);
-    setLocation(true);
+    setLocation(true)
+
     closeForm();
   };
   console.log(user);

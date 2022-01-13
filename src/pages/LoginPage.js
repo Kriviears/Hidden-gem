@@ -72,6 +72,8 @@ const LoginPage = () => {
     );
   };
 
+  //Backend Errors for TOAST MESSAGE:
+
   //  JSX ***  *** *** JSX *** *** *** JSX  ***/
   return (
     <div className={classes.form}>
@@ -100,7 +102,6 @@ const LoginPage = () => {
           <Form.Label className={classes.label}>Password</Form.Label>
           <Form.Control
             onChange={handlePassword}
-            placeholder="At least 8 characters "
             className={classes.input}
             value={password}
             type="password"
@@ -109,10 +110,12 @@ const LoginPage = () => {
         </Form.Group>
       </form>
       <Button
+        className={classes.signupsButtons}
         style={{ marginTop: "10px", width: "300px" }}
         onClick={handleSubmit}
         bg="secondary"
         type="submit"
+        style={{backgroundColor: "rgb(16, 16, 75)"}}
         disabled={!validateForm()}
       >
         Sign In
