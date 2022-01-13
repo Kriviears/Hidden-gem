@@ -5,7 +5,7 @@ import ReactTooltip from "react-tooltip";
 import classes from "./GemForm.module.css";
 import useModal from "../../hooks/useModals";
 
-function GemForm(props) {
+function GemForm({ location, setLocation }) {
   const { closeForm } = useModal();
   const { state } = useProvideAuth();
   const [selected, setSelected] = useState("Other");
@@ -30,7 +30,8 @@ function GemForm(props) {
       description: descRef.current.value,
     };
     const res = await axios.post("/gems", dataObj);
-    console.log(res);
+    console.log(res.data);
+    setLocation(true);
     closeForm();
   };
   console.log(user);

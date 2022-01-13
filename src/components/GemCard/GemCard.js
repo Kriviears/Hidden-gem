@@ -3,12 +3,13 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import axios from "../../utils/axiosConfig";
 import { useProvideAuth } from "../../hooks/useAuth";
 import useModal from "../../hooks/useModals";
+import ReactTooltip from "react-tooltip";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "react-circular-progressbar/dist/styles.css";
 import GemDetails from "../GemDetails/GemDetails";
 import classes from "./GemCard.module.css";
 
-function GemCard({ data }) {
+function GemCard({ data, setLocation }) {
   const { state } = useProvideAuth();
   const { user } = state;
   const {
@@ -64,6 +65,24 @@ function GemCard({ data }) {
   ).toFixed(0);
   const color = rating < 60 ? "#e74c3c" : rating < 85 ? "#f1c40f" : "#27ae60";
 
+  const deleteGem = async () => {
+    try {
+      const response = await axios.delete(`/gems/${data._id}/${user.uid}`);
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
+    if (displayGems) {
+      closeGems();
+      openGems();
+    }
+    if (displayProfile) {
+      closeProfile();
+      openProfile();
+    }
+    setLocation(true);
+  };
+
   return (
     <>
       {loading ? (
@@ -72,9 +91,24 @@ function GemCard({ data }) {
         </div>
       ) : (
         <div className={classes.card}>
-          <div className={classes.info}>
-            <h4>{data.name}</h4>
-            <p>{data.category}</p>
+          <div className={classes.left}>
+            <div className={classes.info}>
+              <h4>{data.name}</h4>
+              <p>{data.category}</p>
+            </div>
+            {data.author === user.uid && (
+              <>
+                <i
+                  onClick={deleteGem}
+                  data-tip
+                  data-for="delete"
+                  class="fas fa-trash-alt"
+                ></i>
+                <ReactTooltip id="delete" place="right" effect="solid">
+                  Delete Gem
+                </ReactTooltip>
+              </>
+            )}
           </div>
           <div className={classes.rating}>
             {reviews > 0 && (

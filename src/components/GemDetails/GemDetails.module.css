@@ -1,13 +1,17 @@
 .details {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 10px 0;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  /* padding-left: 2rem;
+  padding-right: 2rem; */
 }
 
-.details p,
-.details h1 {
-  margin-bottom: 0;
+.icon {
+  font-size: 25px;
+  color: #8ab1f5;
+  border-radius: 50%;
+  padding: 12px;
+  transition: all 0.4s;
+  margin-top: 5px;
 }
