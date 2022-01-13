@@ -78,12 +78,17 @@ const Map = () => {
   if (location) {
     const getGems = async () => {
       const res = await axios.get(`/gems/${userPos[1]}/${userPos[0]}`);
-      console.log(res.data);
       setData(res.data.nearGems);
     };
     getGems();
     setLocation(false);
   }
+
+  const getSearchGems = async (searchLong, searchLat) => {
+    const res = await axios.get(`/gems/${searchLong}/${searchLat}`);
+    console.log(res.data.nearGems);
+    setData(res.data.nearGems);
+  };
 
   const bookmarkGem = async (gem, user) => {
     setSelected(null);
@@ -203,6 +208,9 @@ const Map = () => {
               onViewportChange={handleGeocoderViewportChange}
               mapboxApiAccessToken={MAPBOX_TOKEN}
               position="top-left"
+              onResult={(res) =>
+                getSearchGems(res.result.center[0], res.result.center[1])
+              }
             />
             <NavigationControl style={navControlStyle} />
             <GeolocateControl
@@ -303,12 +311,15 @@ const Map = () => {
               </Popup>
             ) : null}
           </MapGL>
-          {/* <TopBar /> */}
+          <TopBar location={userPos} setData={setData} />
           <Nav event={dropGem} openGem={() => setShowGems(!showGems)} />
-          {displayProfile && <Profile />}
-          {displayGemForm && <GemForm location={userPos} setLocation={setLocation} />}
-          {displayGems && <GemInfo data={data} />}
-          {displayFilter && <Filter />}
+          {displayProfile && <Profile setLocation={setLocation} />}
+          {displayGemForm && (
+            <GemForm location={userPos} setLocation={setLocation} />
+          )}
+          {displayGems && <GemInfo data={data} setLocation={setLocation} />}
+          {displayFilter && <Filter location={userPos} setData={setData} />}
+
           {displayMapStyle && <MapStyle />}
           {displaySettings && <Settings />}
         </>

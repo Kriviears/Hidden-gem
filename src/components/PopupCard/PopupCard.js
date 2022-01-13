@@ -84,6 +84,7 @@ function PopupCard({ data, setSelected }) {
                 ></i>
               )}
             </h3>
+            <h6>{data.category}</h6>
             <h6>
               {(data.dist.calculated / 1609.344).toFixed(2)} miles from you
             </h6>

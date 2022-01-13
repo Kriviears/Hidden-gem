@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import classes from "./Filter.module.css";
 import ReactTooltip from "react-tooltip";
 import useModal from "../../hooks/useModals";
-import { Card } from "react-bootstrap";
+import axios from "../../utils/axiosConfig";
 
-function Filter() {
+function Filter({ location, setData }) {
   const [categories, setCategories] = useState([]);
-  const [rating, setRating] = useState(null);
   const [distance, setDistance] = useState(null);
   const { closeFilter } = useModal();
 
@@ -20,14 +19,18 @@ function Filter() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const meters = distance * 1609.344;
     const filterObj = {
-      rating: rating,
-      distance: distance,
+      distance: meters,
       categories: categories,
     };
-    console.log(filterObj);
+    const res = await axios.post(
+      `/gems/filter/${location[1]}/${location[0]}`,
+      filterObj
+    );
+    setData(res.data.nearGems);
     closeFilter();
   };
 
@@ -38,17 +41,6 @@ function Filter() {
       </button>
       <form className={classes.search_form}>
         <h2 className={classes.title}>Filter Gems</h2>
-        <h5>Filter by Rating:</h5>
-        <small>50</small>
-        <input
-          className={classes.range}
-          type="range"
-          min={50}
-          max={100}
-          onChange={(e) => setRating(e.target.value)}
-        />
-        <small>100</small>
-        <p>{rating}% and up</p>
 
         <h5>Filter by Distance:</h5>
         <small>0.25</small>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useProvideAuth } from "../../hooks/useAuth";
 import axios from "../../utils/axiosConfig";
+import ReactTooltip from "react-tooltip";
 import classes from "./ReviewCard.module.css";
 
 function ReviewCard({ data, setSelect }) {
@@ -48,12 +49,24 @@ function ReviewCard({ data, setSelect }) {
     setSelect(data);
   };
 
-  const handleSubmit = async (e) => {
+  const likeGem = async (e) => {
+    e.preventDefault();
+    setSelect(null);
+    try {
+      const response = await axios.post(`/gems/like/${data._id}/${user.uid}`);
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+    setSelect(data);
+  };
+
+  const dislikeGem = async (e) => {
     e.preventDefault();
     setSelect(null);
     try {
       const response = await axios.post(
-        `/gems/${selected}/${data._id}/${user.uid}`
+        `/gems/dislike/${data._id}/${user.uid}`
       );
       console.log(response.data);
     } catch (err) {
@@ -80,9 +93,17 @@ function ReviewCard({ data, setSelect }) {
           <span className={classes.voted}>
             <i class="fas fa-thumbs-down"></i>
           </span>
-          <button className={classes.cancel} onClick={changeVote}>
+          <button
+            className={classes.cancel}
+            data-tip
+            data-for="cancelTip"
+            onClick={changeVote}
+          >
             <i class="fas fa-times"></i>
           </button>
+          <ReactTooltip id="cancelTip" place="right" effect="solid">
+            Cancel Vote
+          </ReactTooltip>
         </div>
       ) : (
         <div className={classes.card}>
@@ -93,7 +114,7 @@ function ReviewCard({ data, setSelect }) {
                 name="rating"
                 type="radio"
                 value="like"
-                onClick={(e) => setSelected(e.target.value)}
+                onClick={likeGem}
               />
               <span>
                 <i class="fas fa-thumbs-up"></i>
@@ -105,13 +126,13 @@ function ReviewCard({ data, setSelect }) {
                 name="rating"
                 type="radio"
                 value="dislike"
-                onClick={(e) => setSelected(e.target.value)}
+                onClick={dislikeGem}
               />
               <span>
                 <i class="fas fa-thumbs-down"></i>
               </span>
             </label>
-            {selected && (
+            {/* {selected && (
               <button
                 className={classes.send}
                 onClick={handleSubmit}
@@ -119,7 +140,7 @@ function ReviewCard({ data, setSelect }) {
               >
                 <i class="fas fa-arrow-right"></i>
               </button>
-            )}
+            )} */}
           </form>
         </div>
       )}

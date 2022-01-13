@@ -9,6 +9,18 @@
   border-bottom: 1px solid black;
 }
 
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.left i {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #ff0000;
+  cursor: pointer;
+}
+
 .info {
   text-align: left;
 }

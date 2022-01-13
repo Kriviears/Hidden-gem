@@ -1,9 +1,11 @@
 .top {
   position: absolute;
-  top: 0;
+  top: 55px;
+  width: 300px;
+  margin-left: 10px;
   display: flex;
-  width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -19,4 +21,8 @@
 
 .btn:focus {
   outline: none;
+}
+
+.btn:hover {
+  border: 3px solid #000;
 }

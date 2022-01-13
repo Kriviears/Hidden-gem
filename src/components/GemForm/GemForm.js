@@ -31,7 +31,7 @@ function GemForm({ location, setLocation }) {
     };
     const res = await axios.post("/gems", dataObj);
     setLocation(true)
-    console.log(res);
+
     closeForm();
   };
   console.log(user);
