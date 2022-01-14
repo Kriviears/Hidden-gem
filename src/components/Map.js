@@ -19,7 +19,7 @@ import Filter from "./FilterCard/Filter";
 import ReviewCard from "./ReviewCard/ReviewCard";
 import TopBar from "./TopBar/TopBar";
 
-const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
+const MAPBOX_TOKEN = "pk.eyJ1Ijoia3JpdmllYXJzIiwiYSI6ImNreTFyeXRmaTBkd2oycHJzbzVxcGZuZ2UifQ.jQ2yXkHQXA9kXl3dBTYKrg";
 
 const Map = () => {
   const {

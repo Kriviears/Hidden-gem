@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Map from "./components/Map";
+import Map from "./Components/Map";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useProvideAuth } from "./hooks/useAuth";
@@ -10,7 +10,9 @@ import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   const { state } = useProvideAuth();
-  const { user } = state;
+  //const { user } = state;
+
+  const user = true;
 
   return (
     <Router>

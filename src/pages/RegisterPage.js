@@ -11,7 +11,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [city, setCity] = useState("");
-  // const [whichState, setwhichState] = useState("");
+  const [isValid, setIsValidate] = useState(false)
   const [isMatched, setIsMatched] = useState(false);
 
   // States for checking the errors
@@ -35,12 +35,17 @@ const RegisterPage = () => {
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
-
+    if(password === confirmPassword){
+      setIsMatched(true)
+    }
     setSubmitted(false);
   };
 
   const handleConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
+    if(password === confirmPassword){
+      setIsMatched(true)
+    }
   };
 
   const handleCity = (e) => {
@@ -48,33 +53,17 @@ const RegisterPage = () => {
     setSubmitted(false);
   };
 
-  // const handleWhichState = (e) => {
-  //   setwhichState(e.target.value);
-  //   setSubmitted(false);
-  // };
 
   // FUNCTION Handling the form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      fullName === "" ||
-      userName === "" ||
-      email === "" ||
-      password === "" ||
-      confirmPassword === "" ||
-      city === "" ||
-      password !== confirmPassword
-      // (whichState === "")
-    ) {
-      setError(true);
-    } else {
-      if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        console.log(password, confirmPassword);
-      } else {
-        setSubmitted(true);
-        setError(false);
-      }
+    if (validateForm()) {
+      successMessage()
+      setSubmitted(true);
+      setError(false);
+    } else{
+      setError(true)
+      errorMessage() 
     }
 
     //TOAST else?? {
@@ -98,7 +87,7 @@ const RegisterPage = () => {
       email.length > 0 &&
       userName.length &&
       password.length > 5 &&
-      confirmPassword.length > 5
+      isMatched
     );
   };
 
