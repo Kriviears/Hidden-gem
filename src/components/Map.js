@@ -6,6 +6,7 @@ import MapGL, {
   GeolocateControl,
   NavigationControl,
 } from "react-map-gl";
+// eslint-disable-next-line import/no-webpack-loader-syntax
 import axios from "../utils/axiosConfig";
 import useModal from "../hooks/useModals";
 import useMap from "../hooks/useMap";
@@ -19,8 +20,8 @@ import ReviewCard from "./ReviewCard/ReviewCard";
 import MapStyle from "./MapStyle/MapStyle";
 import Settings from "./ProfileSettings/Settings";
 import TopBar from "./TopBar/TopBar";
-import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 import PopupCard from "./PopupCard/PopupCard";
+import { RingLoader } from "react-spinners";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -32,7 +33,6 @@ const Map = () => {
     displayFilter,
     displayMapStyle,
     displaySettings,
-    closeForm,
   } = useModal();
   const { mapStyle } = useMap();
   const { state } = useProvideAuth();
@@ -88,30 +88,6 @@ const Map = () => {
     []
   );
 
-  function dropGem(e) {
-    e.preventDefault();
-    setData([
-      ...data,
-      {
-        lat: userPos[0],
-        lng: userPos[1],
-        name: "My home",
-        category: "Other",
-        likes: 8,
-        reviews: 8,
-        description: "I live here",
-      },
-    ]);
-    setViewport({
-      ...viewport,
-      zoom: 17,
-      latitude: userPos[0],
-      longitude: userPos[1],
-      transitionDuration: 1000,
-    });
-    closeForm();
-  }
-
   const navControlStyle = {
     right: 10,
     top: 50,
@@ -141,8 +117,16 @@ const Map = () => {
   return (
     <>
       {loading ? (
-        <div style={{ height: "100vh" }}>
-          <LoadingSpinner />
+        <div
+          style={{
+            height: "100vh",
+            width: "100vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <RingLoader color="#4fd1c5" size={150} />
         </div>
       ) : (
         <>
@@ -222,7 +206,7 @@ const Map = () => {
             ) : null}
           </MapGL>
           <TopBar location={userPos} setData={setData} />
-          <Nav event={dropGem} openGem={() => setShowGems(!showGems)} />
+          <Nav openGem={() => setShowGems(!showGems)} />
           {displayProfile && <Profile setLocation={setLocation} />}
           {displayGemForm && (
             <GemForm location={userPos} setLocation={setLocation} />

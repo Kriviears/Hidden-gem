@@ -6,7 +6,17 @@ import useModal from "../../hooks/useModals";
 import axios from "../../utils/axiosConfig";
 
 function Filter({ location, setData }) {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([
+    "Food",
+    "Education",
+    "Late Night",
+    "Outdoors",
+    "Date Night",
+    "Entertainment",
+    "Sporting",
+    "Sight Seeing",
+    "Other",
+  ]);
   const [distance, setDistance] = useState(5);
   const { closeModal } = useModal();
 
@@ -27,6 +37,7 @@ function Filter({ location, setData }) {
       distance: meters,
       categories: categories,
     };
+    console.log(filterObj);
     const res = await axios.post(
       `/gems/filter/${location[1]}/${location[0]}`,
       filterObj
