@@ -2,7 +2,7 @@ import React from "react";
 import useModal from "../../hooks/useModals";
 import classes from "./Nav.module.css";
 
-function Nav(props) {
+function Nav() {
   const { toggleForm, toggleGems, toggleProfile, toggleFilter, toggleStyle } =
     useModal();
   return (
@@ -14,11 +14,7 @@ function Nav(props) {
         <button className={classes.btn} onClick={toggleStyle}>
           Map Style
         </button>
-        <button
-          onClick={toggleForm}
-          // onClick={props.event}
-          className={classes.gem}
-        >
+        <button onClick={toggleForm} className={classes.gem}>
           <i class="far fa-gem"></i>
         </button>
         <button className={classes.btn} onClick={toggleGems}>

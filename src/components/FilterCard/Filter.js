@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import classes from "./Filter.module.css";
 import ReactTooltip from "react-tooltip";
+import { toast } from "react-toastify";
 import useModal from "../../hooks/useModals";
 import axios from "../../utils/axiosConfig";
 
 function Filter({ location, setData }) {
   const [categories, setCategories] = useState([]);
-  const [distance, setDistance] = useState(null);
-  const { closeFilter } = useModal();
+  const [distance, setDistance] = useState(5);
+  const { closeModal } = useModal();
 
   const addCategory = (category) => {
     if (categories.includes(category)) {
@@ -30,13 +31,14 @@ function Filter({ location, setData }) {
       `/gems/filter/${location[1]}/${location[0]}`,
       filterObj
     );
+    toast.success("Gems Filtered");
     setData(res.data.nearGems);
-    closeFilter();
+    closeModal();
   };
 
   return (
     <div className={classes.container}>
-      <button onClick={closeFilter} className={classes.close}>
+      <button onClick={closeModal} className={classes.close}>
         <i class="fas fa-times"></i>
       </button>
       <form className={classes.search_form}>
@@ -47,6 +49,7 @@ function Filter({ location, setData }) {
         <input
           className={classes.range}
           type="range"
+          value={distance}
           min={0.25}
           max={15.0}
           step={0.25}
@@ -167,7 +170,6 @@ function Filter({ location, setData }) {
               onClick={(e) => addCategory(e.target.value)}
             />
             <span>
-              {/* <i class="fas fa-golf-ball"></i> */}
               <i class="fas fa-basketball-ball"></i>
             </span>
           </label>

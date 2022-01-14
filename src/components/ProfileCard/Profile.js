@@ -4,10 +4,11 @@ import axios from "../../utils/axiosConfig";
 import classes from "./Profile.module.css";
 import useModal from "../../hooks/useModals";
 import GemCard from "../GemCard/GemCard";
+import { toast } from "react-toastify";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 function Profile({ setLocation }) {
-  const { closeProfile, openSettings } = useModal();
+  const { closeModal, openSettings } = useModal();
   const { state, logout } = useProvideAuth();
   const { user } = state;
   const [bookmarks, setBookmarks] = useState(false);
@@ -15,7 +16,7 @@ function Profile({ setLocation }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [myBookmarks, setMyBookmarks] = useState([]);
-  const [likes, setLikes] = useState([]);
+
   const [myBooks, setMyBooks] = useState([]);
 
   useEffect(() => {
@@ -24,31 +25,22 @@ function Profile({ setLocation }) {
         const response = await axios.get(`users/${user.uid}`);
         setData(response.data);
         setMyBookmarks(response.data.bookmarks);
-        setLikes(response.data.gemLikes);
-
-        console.log("book", myBookmarks);
-        const getLikes = async () => {
-          await likes.map(async (el) => {
-            const res = await axios.get(`gems/${el}`);
-            return res.data;
-          });
-          console.log("Likes", likes);
-        };
-        getLikes();
         setLoading(false);
       } catch (err) {
-        console.error(err);
+        toast.error("Could not find user");
       }
     };
     getUser();
-    console.log(data);
   }, [user]);
+
   const getBookmarks = async () => {
     setMyBooks([]);
     await myBookmarks.forEach(async (el) => {
       const res = await axios.get(`gems/${el}`);
+      if (res.status == 404) return;
       return setMyBooks((myBooks) => [...myBooks, res.data]);
     });
+
     setBookmarks(!bookmarks);
   };
 
@@ -60,7 +52,7 @@ function Profile({ setLocation }) {
         </div>
       ) : (
         <div className={classes.container}>
-          <button onClick={closeProfile} className={classes.close}>
+          <button onClick={closeModal} className={classes.close}>
             <i class="fas fa-times"></i>
           </button>
           <button onClick={openSettings} className={classes.settings}>
@@ -69,7 +61,6 @@ function Profile({ setLocation }) {
           <div className={classes.icon}>
             <i class="far fa-gem"></i>
           </div>
-          {/* <img className={classes.icon} src={test} alt="avatar icon" /> */}
           <h2>Hi {data.username}!</h2>
           <div className={classes.dropdown} onClick={getBookmarks}>
             <h5>My Bookmarks</h5>

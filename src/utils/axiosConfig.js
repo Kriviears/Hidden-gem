@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: `http://localhost:8000/api/`,
+  //baseURL: `http://localhost:8000/api/`,
+  baseURL: `https://hidden-gem-api.herokuapp.com/api/`,
 });
 
 const getUserToken = () => {

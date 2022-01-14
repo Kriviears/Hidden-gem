@@ -6,13 +6,10 @@ import MapGL, {
   GeolocateControl,
   NavigationControl,
 } from "react-map-gl";
-// import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import axios from "../utils/axiosConfig";
-// import "react-circular-progressbar/dist/styles.css";
 import useModal from "../hooks/useModals";
 import useMap from "../hooks/useMap";
 import { useProvideAuth } from "../hooks/useAuth";
-import Geocoder from "react-map-gl-geocoder";
 import Nav from "./Nav/Nav";
 import GemForm from "./GemForm/GemForm";
 import GemInfo from "./GemInfo/GemInfo";
@@ -39,12 +36,8 @@ const Map = () => {
   } = useModal();
   const { mapStyle } = useMap();
   const { state } = useProvideAuth();
-  // const { user } = state;
-
-  const [bookmark, setBookmark] = useState(false);
   const [selected, setSelected] = useState(null);
   const [userPos, setUserPos] = useState([]);
-  const [distFilter, setDistFilter] = useState(Infinity);
   const [data, setData] = useState([]);
   const [showGems, setShowGems] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -60,15 +53,12 @@ const Map = () => {
     }
 
     navigator.geolocation.getCurrentPosition(getPos);
-    console.log(navigator.geolocation.getCurrentPosition(getPos));
 
     const getUser = async () => {
       try {
         const response = await axios.get(`users/${user.uid}`);
         setCurrentUser(response.data);
         setLoading(false);
-        console.log(data);
-        console.log(currentUser);
       } catch (err) {
         console.error(err);
       }
@@ -84,26 +74,6 @@ const Map = () => {
     setLocation(false);
   }
 
-  const getSearchGems = async (searchLong, searchLat) => {
-    const res = await axios.get(`/gems/${searchLong}/${searchLat}`);
-    console.log(res.data.nearGems);
-    setData(res.data.nearGems);
-  };
-
-  const bookmarkGem = async (gem, user) => {
-    setSelected(null);
-    const gemId = gem._id;
-    const userId = user._id;
-    try {
-      const response = await axios.patch(`/gems/bookmark/${gemId}/${userId}`);
-      console.log(response);
-    } catch (err) {
-      console.error(err);
-    }
-
-    // setSelected(gem);
-  };
-
   const [viewport, setViewport] = useState({
     width: "100vw",
     height: "100vh",
@@ -117,41 +87,6 @@ const Map = () => {
     (newViewport) => setViewport(newViewport),
     []
   );
-
-  const handleGeocoderViewportChange = useCallback(
-    (newViewport) => {
-      const geocoderDefaultOverrides = { transitionDuration: 1000 };
-
-      return handleViewportChange({
-        ...newViewport,
-        zoom: 17,
-        pitch: 60,
-        ...geocoderDefaultOverrides,
-      });
-    },
-    [handleViewportChange]
-  );
-
-  function toRad(val) {
-    return (val * Math.PI) / 180;
-  }
-
-  function calcDist(lat, lng) {
-    const radius = 6371;
-    const latDist = toRad(lat - userPos[0]);
-    const lngDist = toRad(lng - userPos[1]);
-    const lat1 = toRad(userPos[0]);
-    const lat2 = toRad(lat);
-    var a =
-      Math.sin(latDist / 2) * Math.sin(latDist / 2) +
-      Math.sin(lngDist / 2) *
-        Math.sin(lngDist / 2) *
-        Math.cos(lat1) *
-        Math.cos(lat2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = radius * c;
-    return d / 1.609344;
-  }
 
   function dropGem(e) {
     e.preventDefault();
@@ -167,7 +102,6 @@ const Map = () => {
         description: "I live here",
       },
     ]);
-    console.log(data);
     setViewport({
       ...viewport,
       zoom: 17,
@@ -188,6 +122,22 @@ const Map = () => {
     top: 10,
   };
 
+  const categoryObj = {
+    Food: <i style={{ color: "green" }} class="fas fa-utensils"></i>,
+    Education: <i style={{ color: "red" }} class="fas fa-university"></i>,
+    "Late Night": <i style={{ color: "purple" }} class="fas fa-cocktail"></i>,
+    Outdoors: <i style={{ color: "brown" }} class="fas fa-mountain"></i>,
+    "Date Night": <i style={{ color: "pink" }} class="fas fa-heart"></i>,
+    Entertainment: (
+      <i style={{ color: "yellowgreen" }} class="fas fa-theater-masks"></i>
+    ),
+    Sporting: (
+      <i style={{ color: "orange" }} class="fas fa-basketball-ball"></i>
+    ),
+    "Sight Seeing": <i style={{ color: "grey" }} class="fas fa-binoculars"></i>,
+    Other: <i class="fas fa-question"></i>,
+  };
+
   return (
     <>
       {loading ? (
@@ -203,15 +153,6 @@ const Map = () => {
             mapboxApiAccessToken={MAPBOX_TOKEN}
             mapStyle={mapStyle}
           >
-            <Geocoder
-              mapRef={mapRef}
-              onViewportChange={handleGeocoderViewportChange}
-              mapboxApiAccessToken={MAPBOX_TOKEN}
-              position="top-left"
-              onResult={(res) =>
-                getSearchGems(res.result.center[0], res.result.center[1])
-              }
-            />
             <NavigationControl style={navControlStyle} />
             <GeolocateControl
               style={geolocateControlStyle}
@@ -227,12 +168,11 @@ const Map = () => {
                   latitude={el.location.coordinates[1]}
                   longitude={el.location.coordinates[0]}
                   offsetLeft={-10}
-                  offsetTop={-10}
+                  offsetTop={-20}
                 >
                   {el.dist.calculated / 1609.344 < 0.11 ? (
-                    <i
-                      style={{ color: "#00ffcb", transform: "scale(1.3)" }}
-                      class="fas fa-gem"
+                    <span
+                      style={{ color: "#00ffcb", fontSize: "22px" }}
                       onClick={(e) => {
                         e.preventDefault();
                         setSelected(el);
@@ -241,45 +181,14 @@ const Map = () => {
                           zoom: 17,
                           latitude: el.location.coordinates[1],
                           longitude: el.location.coordinates[0],
-                          transitionDuration: 1000,
                         });
                       }}
-                    ></i>
-                  ) : el.category === "Food" ? (
-                    <i
-                      style={{ color: "red" }}
-                      class="far fa-gem"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelected(el);
-                        setViewport({
-                          ...viewport,
-                          zoom: 17,
-                          latitude: el.location.coordinates[1],
-                          longitude: el.location.coordinates[0],
-                          transitionDuration: 1000,
-                        });
-                      }}
-                    ></i>
-                  ) : el.category === "Education" ? (
-                    <i
-                      style={{ color: "blue" }}
-                      class="far fa-gem"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setSelected(el);
-                        setViewport({
-                          ...viewport,
-                          zoom: 17,
-                          latitude: el.location.coordinates[1],
-                          longitude: el.location.coordinates[0],
-                          transitionDuration: 1000,
-                        });
-                      }}
-                    ></i>
+                    >
+                      {categoryObj[el.category]}
+                    </span>
                   ) : (
-                    <i
-                      class="far fa-gem"
+                    <span
+                      style={{ fontSize: "22px" }}
                       onClick={(e) => {
                         e.preventDefault();
                         setSelected(el);
@@ -288,10 +197,11 @@ const Map = () => {
                           zoom: 17,
                           latitude: el.location.coordinates[1],
                           longitude: el.location.coordinates[0],
-                          transitionDuration: 1000,
                         });
                       }}
-                    ></i>
+                    >
+                      {categoryObj[el.category]}
+                    </span>
                   )}
                 </Marker>
               );
@@ -319,7 +229,6 @@ const Map = () => {
           )}
           {displayGems && <GemInfo data={data} setLocation={setLocation} />}
           {displayFilter && <Filter location={userPos} setData={setData} />}
-
           {displayMapStyle && <MapStyle />}
           {displaySettings && <Settings />}
         </>

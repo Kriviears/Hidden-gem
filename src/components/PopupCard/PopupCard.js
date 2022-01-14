@@ -30,7 +30,6 @@ function PopupCard({ data, setSelected }) {
     setSelected(null);
     try {
       const response = await axios.patch(`/gems/bookmark/${gemId}/${userId}`);
-      console.log(response);
     } catch (err) {
       console.error(err);
     }

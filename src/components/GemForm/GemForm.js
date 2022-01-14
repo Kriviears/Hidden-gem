@@ -2,11 +2,12 @@ import React, { useState, useRef } from "react";
 import { useProvideAuth } from "../../hooks/useAuth";
 import axios from "../../utils/axiosConfig";
 import ReactTooltip from "react-tooltip";
+import { toast } from "react-toastify";
 import classes from "./GemForm.module.css";
 import useModal from "../../hooks/useModals";
 
 function GemForm({ location, setLocation }) {
-  const { closeForm } = useModal();
+  const { closeModal } = useModal();
   const { state } = useProvideAuth();
   const [selected, setSelected] = useState("Other");
   const nameRef = useRef();
@@ -15,57 +16,39 @@ function GemForm({ location, setLocation }) {
   const lngRef = useRef();
   const { user } = state;
 
-  // Create a function to ensure everything is filled out,
-  // this function will also send it to the backend,
-  // then it will close the module and re-send the fetch requst
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (nameRef.current.value.length === 0) {
+      toast.error("Please enter a name");
+      return;
+    }
+    if (descRef.current.value.length === 0) {
+      toast.error("Please enter a description");
+      return;
+    }
     const dataObj = {
       user: user,
-      lat: latRef.current.value,
-      long: lngRef.current.value,
+      lat: location[0],
+      long: location[1],
       name: nameRef.current.value,
       category: selected,
       description: descRef.current.value,
     };
     const res = await axios.post("/gems", dataObj);
-    setLocation(true)
-
-    closeForm();
+    setLocation(true);
+    toast.success("Gem placed!");
+    closeModal();
   };
-  console.log(user);
+
   return (
     <div className={classes.container}>
-      <button onClick={closeForm} className={classes.close}>
+      <button onClick={closeModal} className={classes.close}>
         <i class="fas fa-times"></i>
       </button>
       <form>
         <h4 className={classes.title}>
           Share Your Hidden Gem <i class="far fa-gem"></i>
         </h4>
-        <div>
-          <input
-            ref={latRef}
-            type="number"
-            id="lat"
-            name="lat"
-            className={classes.input}
-            placeholder="Lat of Gem"
-            required
-          />
-        </div>
-        <div>
-          <input
-            ref={lngRef}
-            type="number"
-            id="lng"
-            name="lng"
-            className={classes.input}
-            placeholder="Lng of Gem"
-            required
-          />
-        </div>
         <div className={classes.name}>
           <input
             ref={nameRef}
@@ -234,7 +217,7 @@ function GemForm({ location, setLocation }) {
           required
         ></textarea>
         <div className={classes.btn_container}>
-          <button className={classes.cancel} onClick={closeForm}>
+          <button className={classes.cancel} onClick={closeModal}>
             <i class="fas fa-times"></i>
           </button>
           <button type="submit" className={classes.gem} onClick={handleSubmit}>

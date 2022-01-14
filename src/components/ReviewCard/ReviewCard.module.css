@@ -47,21 +47,6 @@
   display: block;
 }
 
-.send {
-  font-size: 25px;
-  border: none;
-  color: #000000;
-  border-radius: 50%;
-  transition: all 0.4s;
-  margin-top: 5px;
-  background: #8bf182;
-}
-
-.send:focus,
-.send:active {
-  outline: none;
-}
-
 .voted {
   font-size: 25px;
   border-radius: 50%;

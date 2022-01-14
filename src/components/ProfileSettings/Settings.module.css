@@ -51,12 +51,10 @@
   border-image-slice: 1;
 }
 .topTitle {
-  color: darkblue;
-  margin-top: 5px
+  margin-top: 5px;
 }
 
 .updateTitle {
-  color: darkblue;
   margin-bottom: 20px;
 }
 
@@ -65,29 +63,26 @@
   border: 3px solid #4fd1c5;
   height: 35px;
   width: 40%;
+  min-width: 200px;
   background: #fff;
   color: #000;
   font-size: 20px;
   border-radius: 100px;
   cursor: pointer;
-  box-shadow: 12px 12px 24px rgba(18, 29, 28, 0.64);
 }
-
 
 .settingsBtn:hover,
 .settingsBtn:focus {
   color: #000;
-  border: 2px solid #00ffcb;
-  box-shadow: 0 0 60px rgba(0, 255, 203, 0.64);
+  border: 2px solid #000;
   outline: none;
 }
 
-.error {
-  display: block;
-  background-color: red;
-  color: white;
-  width: fit-content;
-  height: 50px;
-  padding: 5px;
+.subtext {
+  width: 65%;
+  min-width: 250px;
   margin: auto;
+  margin-top: 15px;
+  font-size: 15px;
+  color: rgb(200, 10, 10);
 }

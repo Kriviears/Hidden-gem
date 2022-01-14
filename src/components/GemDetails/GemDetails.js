@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./GemDetails.module.css";
 
 function GemDetails({ data }) {
-  console.log(data);
   const categoryObj = {
     Food: <i class="fas fa-utensils"></i>,
     Education: <i class="fas fa-university"></i>,
@@ -20,9 +19,12 @@ function GemDetails({ data }) {
       <div>
         <span className={classes.icon}>{categoryObj[data.category]}</span>
         <br />
-        <small>
-          {(data.dist.calculated / 1609.344).toFixed(2)} miles from you
-        </small>
+        {data.dist && (
+          <small>
+            {(data.dist.calculated / 1609.344).toFixed(2)} miles from you
+          </small>
+        )}
+        <br />
         <p>{data.description}</p>
       </div>
     </div>

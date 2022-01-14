@@ -5,7 +5,6 @@ import ReactTooltip from "react-tooltip";
 import classes from "./ReviewCard.module.css";
 
 function ReviewCard({ data, setSelect }) {
-  const [selected, setSelected] = useState(null);
   const { state } = useProvideAuth();
   const { user } = state;
   const [currentUser, setCurrentUser] = useState(null);
@@ -18,7 +17,6 @@ function ReviewCard({ data, setSelect }) {
         const response = await axios.get(`users/${user.uid}`);
         setCurrentUser(response.data);
         setLoading(false);
-        console.log(currentUser);
       } catch (err) {
         console.error(err);
       }
@@ -42,7 +40,6 @@ function ReviewCard({ data, setSelect }) {
       const response = await axios.post(
         `/gems/${tempVote}/${data._id}/${user.uid}`
       );
-      console.log(response.data);
     } catch (err) {
       console.error(err);
     }
@@ -54,7 +51,6 @@ function ReviewCard({ data, setSelect }) {
     setSelect(null);
     try {
       const response = await axios.post(`/gems/like/${data._id}/${user.uid}`);
-      console.log(response.data);
     } catch (err) {
       console.error(err);
     }
@@ -68,7 +64,6 @@ function ReviewCard({ data, setSelect }) {
       const response = await axios.post(
         `/gems/dislike/${data._id}/${user.uid}`
       );
-      console.log(response.data);
     } catch (err) {
       console.error(err);
     }
@@ -132,15 +127,6 @@ function ReviewCard({ data, setSelect }) {
                 <i class="fas fa-thumbs-down"></i>
               </span>
             </label>
-            {/* {selected && (
-              <button
-                className={classes.send}
-                onClick={handleSubmit}
-                type="submit"
-              >
-                <i class="fas fa-arrow-right"></i>
-              </button>
-            )} */}
           </form>
         </div>
       )}

@@ -6,56 +6,52 @@
   padding: 0;
   margin: 0;
   margin-top: 15px;
-  color: darkblue;
 }
 
 .title {
   margin-top: 15px;
-}
-
-.label {
-  display: block;
-  font-size: 20px;
-  color: black;
-  margin-top: 5px;
-  margin-bottom: -2px;
-  flex: 50%;
+  margin-bottom: 15px;
 }
 
 .input {
-  font-size: 16px;
-  width: 300px;
-  padding: 5px;
-  margin: 2px;
+  width: 100%;
+  min-width: 250px;
+  border: none;
+  border-bottom: 2px solid #000;
+  outline: none;
+  font-size: 1.3rem;
+  padding: 5px 0;
+  transition: all 0.2s;
+  margin: 10px 4px;
 }
 
-.messages {
-  display: flex;
-  justify-content: center;
+.input:focus {
+  border-width: 3px;
+  border-image: linear-gradient(to right, #8ab1f5, #4285f4);
+  border-image-slice: 1;
 }
 
-.error {
-  display: block;
-  background-color: red;
-  color: white;
-  width: fit-content;
-  height: 50px;
-  padding: 5px;
-  margin: auto;
-}
-
-.success {
-  display: block;
-  color: black;
-  width: fit-content;
-  height: 40px;
-  padding: 5px;
-}
 .link {
-  color:black;
+  margin-top: 5px;
   size: 16px;
 }
 
-.signupsButtons {
-  margin-top: 2rem;
+.btn {
+  margin-top: 30px;
+  border: 3px solid #4fd1c5;
+  height: 35px;
+  width: 40%;
+  min-width: 250px;
+  background: #fff;
+  color: #000;
+  font-size: 20px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #000;
+  border: 2px solid #000;
+  outline: none;
 }

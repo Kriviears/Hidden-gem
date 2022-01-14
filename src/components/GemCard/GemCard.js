@@ -3,7 +3,6 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import axios from "../../utils/axiosConfig";
 import { useProvideAuth } from "../../hooks/useAuth";
 import useModal from "../../hooks/useModals";
-import ReactTooltip from "react-tooltip";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "react-circular-progressbar/dist/styles.css";
 import GemDetails from "../GemDetails/GemDetails";
@@ -12,16 +11,9 @@ import classes from "./GemCard.module.css";
 function GemCard({ data, setLocation }) {
   const { state } = useProvideAuth();
   const { user } = state;
-  const {
-    displayGems,
-    displayProfile,
-    openGems,
-    closeGems,
-    closeProfile,
-    openProfile,
-  } = useModal();
+  const { displayGems, displayProfile, openGems, openProfile, closeModal } =
+    useModal();
   const [details, setDetails] = useState(false);
-  // const [bookmark, setBookmark] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -43,16 +35,15 @@ function GemCard({ data, setLocation }) {
     const userId = user._id;
     try {
       const response = await axios.patch(`/gems/bookmark/${gemId}/${userId}`);
-      console.log(response);
     } catch (err) {
       console.error(err);
     }
     if (displayGems) {
-      closeGems();
+      closeModal();
       openGems();
     }
     if (displayProfile) {
-      closeProfile();
+      closeModal();
       openProfile();
     }
   };
@@ -68,16 +59,15 @@ function GemCard({ data, setLocation }) {
   const deleteGem = async () => {
     try {
       const response = await axios.delete(`/gems/${data._id}/${user.uid}`);
-      console.log(response);
     } catch (err) {
       console.error(err);
     }
     if (displayGems) {
-      closeGems();
+      closeModal();
       openGems();
     }
     if (displayProfile) {
-      closeProfile();
+      closeModal();
       openProfile();
     }
     setLocation(true);
@@ -97,17 +87,7 @@ function GemCard({ data, setLocation }) {
               <p>{data.category}</p>
             </div>
             {data.author === user.uid && (
-              <>
-                <i
-                  onClick={deleteGem}
-                  data-tip
-                  data-for="delete"
-                  class="fas fa-trash-alt"
-                ></i>
-                <ReactTooltip id="delete" place="right" effect="solid">
-                  Delete Gem
-                </ReactTooltip>
-              </>
+              <i onClick={deleteGem} class="fas fa-trash-alt"></i>
             )}
           </div>
           <div className={classes.rating}>

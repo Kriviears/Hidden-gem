@@ -64,3 +64,9 @@
 .gem:focus::before {
   opacity: 1;
 }
+
+@media (max-width: 600px) {
+  .btn {
+    font-size: 14px;
+  }
+}

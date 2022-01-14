@@ -8,12 +8,12 @@ import useMap from "../../hooks/useMap";
 import classes from "./MapStyle.module.css";
 
 function MapStyle() {
-  const { closeStyle } = useModal();
+  const { closeModal } = useModal();
   const { setBlueprint, setLight, setSun, setDefault } = useMap();
 
   return (
     <div className={classes.container}>
-      <button onClick={closeStyle} className={classes.close}>
+      <button onClick={closeModal} className={classes.close}>
         <i class="fas fa-times"></i>
       </button>
       <div className={classes.card} onClick={setBlueprint}>
