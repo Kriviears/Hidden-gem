@@ -6,6 +6,7 @@ import MapGL, {
   GeolocateControl,
   NavigationControl,
 } from "react-map-gl";
+// eslint-disable-next-line import/no-webpack-loader-syntax
 import axios from "../utils/axiosConfig";
 import useModal from "../hooks/useModals";
 import useMap from "../hooks/useMap";
@@ -23,8 +24,6 @@ import PopupCard from "./PopupCard/PopupCard";
 import { RingLoader } from "react-spinners";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
-
-console.log(MAPBOX_TOKEN);
 
 const Map = () => {
   const {
