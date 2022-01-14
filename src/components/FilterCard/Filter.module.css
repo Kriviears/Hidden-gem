@@ -63,7 +63,6 @@
   color: #fff;
 }
 
-/* Filter Button */
 .btn {
   border: 3px solid #4fd1c5;
   height: 50px;
@@ -83,7 +82,6 @@
   border: 5px solid #00ffcb;
 }
 
-/* Close button in corner */
 .close {
   position: absolute;
   left: 0;
@@ -104,8 +102,6 @@
   outline: none;
 }
 
-/* Range stuff */
-
 .range {
   height: 34px;
   -webkit-appearance: none;
@@ -115,6 +111,7 @@
 .range:focus {
   outline: none;
 }
+
 .range::-webkit-slider-runnable-track {
   width: 50%;
   height: 11px;
