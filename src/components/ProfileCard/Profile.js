@@ -5,7 +5,7 @@ import classes from "./Profile.module.css";
 import useModal from "../../hooks/useModals";
 import GemCard from "../GemCard/GemCard";
 import { toast } from "react-toastify";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { RingLoader } from "react-spinners";
 
 function Profile({ setLocation }) {
   const { closeModal, openSettings } = useModal();
@@ -48,7 +48,9 @@ function Profile({ setLocation }) {
     <>
       {loading ? (
         <div className={classes.container}>
-          <LoadingSpinner />
+          <div className={classes.spinner}>
+            <RingLoader color="#4fd1c5" size={100} />
+          </div>
         </div>
       ) : (
         <div className={classes.container}>

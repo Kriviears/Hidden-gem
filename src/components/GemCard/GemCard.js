@@ -3,7 +3,6 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import axios from "../../utils/axiosConfig";
 import { useProvideAuth } from "../../hooks/useAuth";
 import useModal from "../../hooks/useModals";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "react-circular-progressbar/dist/styles.css";
 import GemDetails from "../GemDetails/GemDetails";
 import classes from "./GemCard.module.css";
@@ -77,7 +76,7 @@ function GemCard({ data, setLocation }) {
     <>
       {loading ? (
         <div className={classes.container}>
-          <LoadingSpinner />
+          <></>
         </div>
       ) : (
         <div className={classes.card}>

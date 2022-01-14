@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useProvideAuth } from "../../hooks/useAuth";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import axios from "../../utils/axiosConfig";
@@ -47,7 +46,7 @@ function PopupCard({ data, setSelected }) {
     <>
       {loading ? (
         <div style={{ height: "100%" }}>
-          <LoadingSpinner />
+          <></>
         </div>
       ) : (
         <div
