@@ -24,6 +24,8 @@ import { RingLoader } from "react-spinners";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
+console.log(MAPBOX_TOKEN);
+
 const Map = () => {
   const {
     displayGemForm,
