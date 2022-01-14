@@ -1,0 +1,40 @@
+.container {
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  transform: translate(-50%);
+  border: 6px solid black;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 75px;
+  background: #fff;
+  height: 70vh;
+  width: 50vw;
+  min-width: 300px;
+  overflow: scroll;
+  box-shadow: 12px 12px 24px rgba(18, 29, 28, 0.64);
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.close {
+  position: absolute;
+  left: 0;
+  font-size: 30px;
+  color: #747474;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: all 1s;
+}
+
+.close:hover {
+  transform: rotate(180deg);
+  color: #000;
+}
+
+.close:focus {
+  outline: none;
+}

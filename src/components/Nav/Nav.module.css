@@ -1,0 +1,72 @@
+.container {
+  position: absolute;
+  bottom: 0;
+}
+
+.nav {
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 3px;
+}
+
+.btn {
+  border: 3px solid #4fd1c5;
+  height: 50px;
+  width: 20%;
+  background: #fff;
+  color: #000;
+  font-size: 24px;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: 12px 12px 24px rgba(18, 29, 28, 0.64);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:hover {
+  transform: translateY(-6px);
+}
+
+.gem {
+  min-height: 60px;
+  font-size: 60px;
+  color: #4fd1c5;
+  background: #fff;
+  border: 3px solid #4fd1c5;
+  border-radius: 100%;
+  box-shadow: 12px 12px 24px rgba(18, 29, 28, 0.64);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  width: 7rem;
+  height: 7rem;
+}
+
+.gem:active {
+  outline: none;
+}
+
+.gem:hover,
+.gem:focus {
+  color: #000;
+  transform: translateY(-6px);
+  border: 6px solid #00ffcb;
+  box-shadow: 0 0 60px rgba(0, 255, 203, 0.64);
+  outline: none;
+}
+
+.gem:hover::before,
+.gem:focus::before {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .btn {
+    font-size: 14px;
+  }
+}

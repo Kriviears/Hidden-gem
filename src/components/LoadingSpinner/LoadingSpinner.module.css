@@ -1,0 +1,90 @@
+.spinner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.blue {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 165px;
+  height: 165px;
+  border: 3px solid #066ea1a5;
+  -webkit-animation: spin3D 3s linear 0.2s infinite;
+}
+
+.green {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border: 3px solid #0dbb56a5;
+  -webkit-animation: spin3D 2s linear 0s infinite;
+}
+
+.red {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  border: 3px solid #cc2114a5;
+  -webkit-animation: spin3D 1s linear 0s infinite;
+}
+
+.b1 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #000000;
+  -webkit-animation: spin3D 4s linear 0s infinite;
+  transform: rotate3D(1, 1, 1, 360deg);
+}
+
+.b2 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #000000;
+  -webkit-animation: spin3D 8s linear 0s infinite;
+}
+
+.b3 {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #000000;
+  -webkit-animation: spin3D 12s linear 0s infinite;
+}
+
+@keyframes spin3D {
+  from {
+    transform: rotate3d(0.5, 0.5, 0.5, 360deg);
+  }
+  to {
+    transform: rotate3d(0deg);
+  }
+}
