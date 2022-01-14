@@ -6,6 +6,7 @@ import MapGL, {
   GeolocateControl,
   NavigationControl,
 } from "react-map-gl";
+// eslint-disable-next-line import/no-webpack-loader-syntax
 import axios from "../utils/axiosConfig";
 import useModal from "../hooks/useModals";
 import useMap from "../hooks/useMap";
