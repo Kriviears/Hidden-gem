@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./GemDetails.module.css";
 
-function GemDetails({ data }) {
+function GemDetails({ data, location }) {
   const categoryObj = {
     Food: <i class="fas fa-utensils"></i>,
     Education: <i class="fas fa-university"></i>,
@@ -27,6 +27,13 @@ function GemDetails({ data }) {
         <br />
         <p>{data.description}</p>
       </div>
+      <a
+        href={`https://www.google.com/maps/dir/${location[0]},${location[1]}/${data.location.coordinates[1]},${data.location.coordinates[0]}`}
+        target="_blank"
+        className={classes.link}
+      >
+        <i class="fas fa-location-arrow"></i>
+      </a>
     </div>
   );
 }

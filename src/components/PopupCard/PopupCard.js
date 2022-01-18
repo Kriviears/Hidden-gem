@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import axios from "../../utils/axiosConfig";
 
-function PopupCard({ data, setSelected }) {
+function PopupCard({ location, data, setSelected }) {
   const { state } = useProvideAuth();
   const { user } = state;
   const [currentUser, setCurrentUser] = useState(null);
@@ -59,7 +59,12 @@ function PopupCard({ data, setSelected }) {
         >
           <div>
             <h3>
-              {data.name}{" "}
+              <a
+                href={`https://www.google.com/maps/dir/${location[0]},${location[1]}/${data.location.coordinates[1]},${data.location.coordinates[0]}`}
+                target="_blank"
+              >
+                {data.name}
+              </a>{" "}
               {currentUser.bookmarks.includes(data._id) ? (
                 <i
                   style={{
