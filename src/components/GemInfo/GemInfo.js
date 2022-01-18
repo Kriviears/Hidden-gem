@@ -12,7 +12,12 @@ function GemInfo(props) {
         <i class="fas fa-times"></i>
       </button>
       {props.data.map((data) => (
-        <GemCard key={data._id} data={data} setLocation={props.setLocation} />
+        <GemCard
+          location={props.location}
+          key={data._id}
+          data={data}
+          setLocation={props.setLocation}
+        />
       ))}
     </div>
   );

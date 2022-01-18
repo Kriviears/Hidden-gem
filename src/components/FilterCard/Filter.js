@@ -6,17 +6,7 @@ import useModal from "../../hooks/useModals";
 import axios from "../../utils/axiosConfig";
 
 function Filter({ location, setData }) {
-  const [categories, setCategories] = useState([
-    "Food",
-    "Education",
-    "Late Night",
-    "Outdoors",
-    "Date Night",
-    "Entertainment",
-    "Sporting",
-    "Sight Seeing",
-    "Other",
-  ]);
+  const [categories, setCategories] = useState([]);
   const [distance, setDistance] = useState(5);
   const { closeModal } = useModal();
 
@@ -30,20 +20,44 @@ function Filter({ location, setData }) {
     }
   };
 
+  const allCat = [
+    "Food",
+    "Education",
+    "Late Night",
+    "Outdoors",
+    "Date Night",
+    "Entertainment",
+    "Sporting",
+    "Sight Seeing",
+    "Other",
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const meters = distance * 1609.344;
-    const filterObj = {
-      distance: meters,
-      categories: categories,
-    };
-    console.log(filterObj);
-    const res = await axios.post(
-      `/gems/filter/${location[1]}/${location[0]}`,
-      filterObj
-    );
-    toast.success("Gems Filtered");
-    setData(res.data.nearGems);
+    if (categories.length === 0) {
+      const filterObj = {
+        distance: meters,
+        categories: allCat,
+      };
+      const res = await axios.post(
+        `/gems/filter/${location[1]}/${location[0]}`,
+        filterObj
+      );
+      toast.success("Gems Filtered");
+      setData(res.data.nearGems);
+    } else {
+      const filterObj = {
+        distance: meters,
+        categories: categories,
+      };
+      const res = await axios.post(
+        `/gems/filter/${location[1]}/${location[0]}`,
+        filterObj
+      );
+      toast.success("Gems Filtered");
+      setData(res.data.nearGems);
+    }
     closeModal();
   };
 
