@@ -7,7 +7,7 @@ import "react-circular-progressbar/dist/styles.css";
 import GemDetails from "../GemDetails/GemDetails";
 import classes from "./GemCard.module.css";
 
-function GemCard({ data, setLocation }) {
+function GemCard({ data, setLocation, location }) {
   const { state } = useProvideAuth();
   const { user } = state;
   const { displayGems, displayProfile, openGems, openProfile, closeModal } =
@@ -149,7 +149,7 @@ function GemCard({ data, setLocation }) {
               )}
             </div>
           </div>
-          {details && <GemDetails data={data} />}
+          {details && <GemDetails location={location} data={data} />}
         </div>
       )}
     </>

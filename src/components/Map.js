@@ -198,7 +198,11 @@ const Map = () => {
                 offsetTop={-10}
                 onClose={() => setSelected(null)}
               >
-                <PopupCard data={selected} setSelected={setSelected} />
+                <PopupCard
+                  data={selected}
+                  setSelected={setSelected}
+                  location={userPos}
+                />
                 {selected.dist.calculated / 1609.344 < 0.11 && (
                   <ReviewCard data={selected} setSelect={setSelected} />
                 )}
@@ -211,7 +215,9 @@ const Map = () => {
           {displayGemForm && (
             <GemForm location={userPos} setLocation={setLocation} />
           )}
-          {displayGems && <GemInfo data={data} setLocation={setLocation} />}
+          {displayGems && (
+            <GemInfo location={userPos} data={data} setLocation={setLocation} />
+          )}
           {displayFilter && <Filter location={userPos} setData={setData} />}
           {displayMapStyle && <MapStyle />}
           {displaySettings && <Settings />}
