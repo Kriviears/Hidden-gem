@@ -211,7 +211,9 @@ const Map = () => {
           </MapGL>
           <TopBar location={userPos} setData={setData} />
           <Nav openGem={() => setShowGems(!showGems)} />
-          {displayProfile && <Profile setLocation={setLocation} />}
+          {displayProfile && (
+            <Profile location={userPos} setLocation={setLocation} />
+          )}
           {displayGemForm && (
             <GemForm location={userPos} setLocation={setLocation} />
           )}
