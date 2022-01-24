@@ -7,7 +7,7 @@ import GemCard from "../GemCard/GemCard";
 import { toast } from "react-toastify";
 import { RingLoader } from "react-spinners";
 
-function Profile({ setLocation }) {
+function Profile({ setLocation, location }) {
   const { closeModal, openSettings } = useModal();
   const { state, logout } = useProvideAuth();
   const { user } = state;
@@ -82,7 +82,12 @@ function Profile({ setLocation }) {
           {bookmarks && (
             <div>
               {myBooks.map((el) => (
-                <GemCard key={el._id} data={el} setLocation={setLocation} />
+                <GemCard
+                  key={el._id}
+                  location={location}
+                  data={el}
+                  setLocation={setLocation}
+                />
               ))}
             </div>
           )}
@@ -104,7 +109,12 @@ function Profile({ setLocation }) {
           {myGems && (
             <div>
               {data.gems?.map((el) => (
-                <GemCard key={el._id} data={el} setLocation={setLocation} />
+                <GemCard
+                  key={el._id}
+                  location={location}
+                  data={el}
+                  setLocation={setLocation}
+                />
               ))}
             </div>
           )}
